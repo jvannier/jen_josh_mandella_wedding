@@ -1,38 +1,20 @@
-from flask import (
-    Flask,
-    render_template,
-    send_from_directory,
-    request,
-    jsonify,
-    make_response,
-)
-from flask_cors import CORS, cross_origin
-import os
+#!/usr/bin/env python3
+from flask import send_from_directory
+from flask_cors import cross_origin
+from backend.endpoints import flask_app
 
 
-app = Flask(__name__, static_folder='frontend/build', static_url_path='/')
-cors = CORS(app)
-
-
-@app.route('/api')
+@flask_app.route('/')
 @cross_origin()
-def Welcome():
-    return "Welcome to the API!!!"
-
-
-@app.route('/')
 def serve():
-    print("AAAAaaaanot found aaaAAA")
-    # return app.send_static_file('index.html')
-    # root_dir = os.path.dirname(os.getcwd())
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory(flask_app.static_folder, 'index.html')
 
 
-@app.errorhandler(404)
+@flask_app.errorhandler(404)
+@cross_origin()
 def not_found(e):
-    print("not found")
-    return app.send_static_file('index.html')
+    return send_from_directory(flask_app.static_folder, 'index.html')
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    flask_app.run(host='0.0.0.0')
