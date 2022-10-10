@@ -3,6 +3,7 @@
 The first time, install requirements:
 ```
 pip install -r requirements.txt
+npm install frontend
 ```
 
 Starting the application itself:

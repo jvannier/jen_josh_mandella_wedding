@@ -1,0 +1,31 @@
+.NavBar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: sticky;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    height: 7.15vh;
+}
+
+.link {
+    color: purple;
+    margin: auto;
+}
+
+@media (prefers-color-scheme: light) {
+    .NavBar {
+        background-color: white;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .NavBar {
+        background-color: black;
+    }
+
+    #userName {
+        margin: auto;
+        color: lightgray;
+    }
+}

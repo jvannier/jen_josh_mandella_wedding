@@ -1,0 +1,12 @@
+@media (prefers-color-scheme: dark) {
+    [role=button] {
+        border-color: #5A5A5A !important;
+        background: #5A5A5A !important;
+        color: lightgray !important;
+    }
+}
+
+#logout {
+    border: 0;
+    margin: 1%;
+}

@@ -1,39 +1,34 @@
-// import './NavBar.css';
-// import Login from "./Login";
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import './NavBar.css';
+import Login from "./Login";
 
 
 function NavBar(props) {
-  // let [adminPageLink, setAdminPageLink] = useState("");
+  let [adminPageLink, setAdminPageLink] = useState("");
 
-  // useEffect(() => {
-  //   if (props.userID !== undefined) {
-  //     is_logged_in_admin(props.userID, props.token).then(result => {
-  //       if (result === true) {
-  //         setAdminPageLink(<Link id="adminLink" to="/admin">Admin</Link>);
-  //       } else {
-  //         setAdminPageLink("");
-  //       }
-  //     });
-  //   } else {
-  //     setAdminPageLink("");
-  //   }
-  // }, [props.token]);
+  useEffect(() => {
+    props.user.isLoggedInAdmin().then(result => {
+      if (result === true) {
+        setAdminPageLink(
+          <Link className="link" id="adminLink" to="/admin">Admin</Link>
+        );
+      } else {
+        setAdminPageLink("");
+      }
+    });
+    // eslint-disable-next-line
+  }, [props.user.userID, props.user.token, props.user.isAdmin]);
 
   return (
     <span className="NavBar">
-      <Link id="homeLink" to="/">Home</Link>
-      <Link id="aboutLink" to="/about">About</Link>
-      {/* {adminPageLink}
+      <Link className="link" id="homeLink" to="/">Home</Link>
+      <Link className="link" id="statusLink" to="/status">Status</Link>
+      {adminPageLink}
       <div id="userName">
-        {props.userName}
+        {props.user.userName}
       </div>
-      <Login
-        userID={props.userID} setUserID={props.setUserID}
-        setUserName={props.setUserName}
-        token={props.token} setToken={props.setToken}
-      /> */}
+      <Login user={props.user}/>
     </span>
   );
 }

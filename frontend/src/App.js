@@ -1,43 +1,52 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
-import User from "./data_structures/user"
+import Status from "./components/Status"
+import User from "./dataStructures/user"
 import './App.css';
 
 
 function App() {
-  // User()
-  // let [userID, setUserID] = useState(localStorage.getItem("id"));
-  // let [userName, setUserName] = useState();
-  // let [token, setToken] = useState(localStorage.getItem("token"));
-  // let [isAdmin, setIsAdmin] = useState(false);
+  let [userID, setUserID] = useState();
+  let [userName, setUserName] = useState();
+  let [token, setToken] = useState();
+  let [isAdmin, setIsAdmin] = useState(false);
 
-  // let [adminPageLink, setAdminPageLink] = useState("");
+  let user = new User(
+    userID, setUserID, userName, setUserName,
+    token, setToken, isAdmin, setIsAdmin,
+  );  
 
-  // useEffect(() => {
-  //   // is_logged_in_admin(userID, token).then(result => {
-  //   //   if (result === true) {
-  //   //     adminPageLink = <div>you are an admin</div>
-  //   //   }
-  //   // })
-  // }, [token, isAdmin]);
+  let [adminPageLink, setAdminPageLink] = useState("");
+
+  useEffect(() => {
+    user.isLoggedInAdmin().then(result => {
+      if (result === true) {
+        setAdminPageLink(
+          <Route exact path="/admin" element={
+            <div className="page">TODO: Admin</div>
+          }/>
+        );
+      }
+    });
+    // eslint-disable-next-line
+  }, [user.userID, user.token, user.isAdmin]);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar
-          // userID={userID} setUserID={setUserID}
-          // userName={userName} setUserName={setUserName}
-          // token={token} setToken={setToken}
-        />
+        <NavBar user={user}/>
         <Routes>
-          <Route exact path="/" element={
-            <div>home page?</div>
+          <Route exact path="/*" element={
+            <div
+              className="page" id="home"
+              role="img" aria-label="Save the date. July 8th"
+            />
           }/>
-          <Route exact path="/about" element={
-            <div>about page</div>
+          <Route exact path="/status" element={
+            <Status className="page" user={user}/>
           }/>
-          {/* {adminPageLink} */}
+          {adminPageLink}
         </Routes>
       </BrowserRouter>
     </div>
