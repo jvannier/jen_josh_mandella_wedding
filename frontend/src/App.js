@@ -44,7 +44,7 @@ function App() {
             />
           }/>
           <Route exact path="/status" element={
-            <Status className="page" user={user}/>
+            <Status user={user}/>
           }/>
           {adminPageLink}
         </Routes>

@@ -1,9 +1,12 @@
 .page {
-  height: 92.85vh;
+  height: 91vh;
+  background-size: 100vw 100%;
+  display: flex;
 }
 
 .App {
   min-height: 100vh;
+  height: 100vh;
   font-size: calc(10px + 2vmin);
 }
 
@@ -13,14 +16,12 @@ a {
 
 @media (prefers-color-scheme: light) {
   #home {
-    /* TODO: Background image here */
-    background-color: white;
+    background-image: url("../assets/JJWeddingBanner\ \(LIGHT\).png");
   }
 }
 
 @media (prefers-color-scheme: dark) {
   #home {
-    /* TODO: Background image here */
-    background-color: gray;
+    background-image: url("../assets/JJWeddingBanner\ \(DARK\).png");
   }
 }

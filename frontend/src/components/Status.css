@@ -1,0 +1,10 @@
+#status_page {
+    background-image: url("../../assets/cat_wow.png");
+}
+
+#status_text {
+    background-color: rgba(0,0,0,.75);
+    margin: auto;
+    color: lightgray;
+    padding: 2%;
+}
