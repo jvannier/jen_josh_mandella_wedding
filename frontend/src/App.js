@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
+import Admin from "./components/Admin";
 import NavBar from "./components/NavBar";
 import Status from "./components/Status"
 import User from "./dataStructures/user"
@@ -24,7 +25,7 @@ function App() {
       if (result === true) {
         setAdminPageLink(
           <Route exact path="/admin" element={
-            <div className="page">TODO: Admin</div>
+            <Admin user={user}/>
           }/>
         );
       }

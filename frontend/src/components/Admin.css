@@ -1,8 +1,4 @@
-#statusPage {
-    background-image: url("../../assets/cat_wow.png");
-}
-
-#statusText {
+#adminText {
     background-color: rgba(0,0,0,.75);
     margin: auto;
     color: lightgray;

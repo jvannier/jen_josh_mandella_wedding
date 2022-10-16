@@ -11,7 +11,10 @@
 .link {
     color: purple;
     margin: auto;
-    font-family: Arial;
+}
+
+#userName {
+    margin: auto;
 }
 
 @media (prefers-color-scheme: light) {
@@ -28,7 +31,6 @@
     }
 
     #userName {
-        margin: auto;
         color: lightgray;
     }
 }

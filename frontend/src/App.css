@@ -8,6 +8,7 @@
   min-height: 100vh;
   height: 100vh;
   font-size: calc(10px + 2vmin);
+  font-family: Arial;
 }
 
 a {
@@ -15,12 +16,22 @@ a {
 }
 
 @media (prefers-color-scheme: light) {
+  .page {
+    background-color: white;
+    color: black;
+  }
+
   #home {
     background-image: url("../assets/JJWeddingBanner\ \(LIGHT\).png");
   }
 }
 
 @media (prefers-color-scheme: dark) {
+  .page {
+    background-color: black;
+    color: white;
+  }
+
   #home {
     background-image: url("../assets/JJWeddingBanner\ \(DARK\).png");
   }

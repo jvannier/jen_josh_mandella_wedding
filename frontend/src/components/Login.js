@@ -27,15 +27,17 @@ function Login(props) {
     if (props.user.token === null) {
         // Login
         return (
-            <GoogleLogin id="googleLogin"
-                onSuccess={
-                    credentialResponse => props.user.login(credentialResponse)
-                }
-                onError={(err) => {
-                    console.log('Login Failed', err);
-                    logout();
-                }}
-            />
+            <span id="googleLogin">
+                <GoogleLogin id="googleLogin"
+                    onSuccess={
+                        credentialResponse => props.user.login(credentialResponse)
+                    }
+                    onError={(err) => {
+                        console.log('Login Failed', err);
+                        logout();
+                    }}
+                />
+            </span>
         );
     } else {
         // Logout

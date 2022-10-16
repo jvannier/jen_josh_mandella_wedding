@@ -7,6 +7,13 @@
 }
 
 #logout {
-    border: 0;
     margin: 1%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#googleLogin {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-right: 3px;
 }

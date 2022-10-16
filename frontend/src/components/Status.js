@@ -9,8 +9,8 @@ function Status(props) {
     }, []);
 
     return (
-        <div className="page" id="status_page">
-            <div id="status_text">
+        <div className="page" id="statusPage">
+            <div id="statusText">
                 <p>
                     We have a wedding planner. She's great.
                     <br/>
