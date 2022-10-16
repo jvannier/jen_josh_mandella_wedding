@@ -15,12 +15,18 @@
 
 #userName {
     margin: auto;
+    -webkit-text-fill-color: transparent;
 }
 
 @media (prefers-color-scheme: light) {
     .NavBar {
         background-color: white;
         background-image: linear-gradient(to bottom right, white, white, #CDB0EE);
+    }
+
+    #userName {
+        background: -webkit-linear-gradient(purple, navy);
+        background-clip: text;
     }
 }
 
@@ -31,6 +37,7 @@
     }
 
     #userName {
-        color: lightgray;
+        background: -webkit-linear-gradient(lightblue, #CDB0EE);
+        background-clip: text;
     }
 }

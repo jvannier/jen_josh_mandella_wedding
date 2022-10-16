@@ -5,6 +5,16 @@
 #statusText {
     background-color: rgba(0,0,0,.75);
     margin: auto;
-    color: lightgray;
+    color: #EEE1FF;
     padding: 2%;
+}
+
+th {
+    background-color: rgba(0,0,80,.75);
+    color: #EEE1FF;
+}
+
+td {
+    background-color: rgba(0,0,150,.75);
+    color: #EEE1FF;
 }

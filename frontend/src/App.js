@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import Admin from "./components/Admin";
 import NavBar from "./components/NavBar";
-import Status from "./components/Status"
+import Statuses from "./components/Statuses"
 import User from "./dataStructures/user"
 import './App.css';
 
@@ -45,7 +45,7 @@ function App() {
             />
           }/>
           <Route exact path="/status" element={
-            <Status user={user}/>
+            <Statuses user={user}/>
           }/>
           {adminPageLink}
         </Routes>
