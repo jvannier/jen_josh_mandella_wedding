@@ -12,12 +12,18 @@ function Statuses(props) {
     let [adminInput, setAdminInput] = useState();
 
     useEffect(() => {
-        setStatusRows(Status.getStatuses());
+        setStatusRows(Status.getStatuses(props.user));
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         if (props.user.isAdmin) {
-            setAdminInput(<AdminStatusRow user={props.user}/>);
+            setAdminInput(
+                <AdminStatusRow
+                    setStatusRows={setStatusRows}
+                    user={props.user}
+                />
+            );
         } else {
             setAdminInput();
         }

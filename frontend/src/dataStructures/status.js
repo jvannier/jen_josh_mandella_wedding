@@ -11,7 +11,7 @@ class Status {
         this.text = text;
     }
 
-    static getStatuses() {
+    static getStatuses(user) {
         // TODO: Get statuses from DB
 
         return [
@@ -24,6 +24,10 @@ class Status {
         this.checked = value;
 
         // TODO: Update status in DB
+    }
+
+    addStatusInDB(user) {
+        // TODO: Store new row data in DB
     }
 }
 

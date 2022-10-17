@@ -7,6 +7,8 @@
     margin: auto;
     color: #EEE1FF;
     padding: 2%;
+    height: 90%;
+    overflow: scroll;
 }
 
 th {

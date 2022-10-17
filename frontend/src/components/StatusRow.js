@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import './StatusRow.css';
 import { Td, Tr } from 'react-super-responsive-table';
 
 
 function StatusRow(props) {
     let [checked, setChecked] = useState(props.status.checked);
-
-    useEffect(() => {
-        // TODO Update information in database
-    }, [props.user.isAdmin, props.user.userID, checked]);
 
     return (
         <Tr>
