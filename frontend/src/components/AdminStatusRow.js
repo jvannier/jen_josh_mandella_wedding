@@ -32,9 +32,12 @@ function AdminStatusRow(props) {
             </Td>
             <Td>
                 <div className="status">
-                    <input type="text" onChange={event => {
-                        setText(event.target.value)
-                    }}/>
+                    <input
+                    type="text" className="textInput"
+                        onChange={event => {
+                            setText(event.target.value)
+                        }}
+                    />
                     <input
                         type="submit" value="Add"
                         onClick={handleSubmit}

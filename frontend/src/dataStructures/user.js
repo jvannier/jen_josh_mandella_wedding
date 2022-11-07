@@ -92,10 +92,11 @@ class User {
 
     async isLoggedInAdmin() {
         // TODO: Call API
-        // this.setIsAdmin(true);
-        // return new Promise((resolve, reject) => resolve(true));
         this.setIsAdmin(false);
-        return new Promise((resolve, reject) => resolve(false));
+        return new Promise((resolve, reject) => resolve({
+            "admin": false,
+            "loggedIn": false,
+        }));
     }
 }
 

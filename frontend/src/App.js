@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import Admin from "./components/Admin";
 import NavBar from "./components/NavBar";
+import RSVP from "./components/RSVP"
 import Statuses from "./components/Statuses"
 import User from "./dataStructures/user"
 import './App.css';
@@ -19,15 +20,29 @@ function App() {
   );  
 
   let [adminPageLink, setAdminPageLink] = useState("");
+  let [rsvpPageLink, setRsvpPageLink] = useState("");
 
   useEffect(() => {
     user.isLoggedInAdmin().then(result => {
-      if (result === true) {
-        setAdminPageLink(
-          <Route exact path="/admin" element={
-            <Admin user={user}/>
+      if (result["loggedIn"] === true) {
+        setRsvpPageLink(
+          <Route exact path="/rsvp" element={
+            <RSVP user={user}/>
           }/>
         );
+
+        if (result["admin"] === true) {
+          setAdminPageLink(
+            <Route exact path="/admin" element={
+              <Admin user={user}/>
+            }/>
+          );
+        } else {
+          setAdminPageLink("");
+        }
+      } else {
+        setAdminPageLink("");
+        setRsvpPageLink("");
       }
     });
     // eslint-disable-next-line
@@ -47,6 +62,7 @@ function App() {
           <Route exact path="/status" element={
             <Statuses user={user}/>
           }/>
+          {rsvpPageLink}
           {adminPageLink}
         </Routes>
       </BrowserRouter>
