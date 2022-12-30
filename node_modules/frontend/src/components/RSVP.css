@@ -1,0 +1,22 @@
+#rsvpTextYes {
+    margin: auto;
+    color: black;
+}
+
+#rsvpTextNo {
+    margin: auto;
+    color: white;
+}
+
+span {
+    display: flex;
+    width: 50%;
+}
+
+#yes {
+    background-image: linear-gradient(to bottom right, navy, lavender);
+}
+
+#no {
+    background-image: linear-gradient(to bottom right, gray, black);
+}
