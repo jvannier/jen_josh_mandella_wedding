@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import Admin from "./components/Admin";
+import Info from "./components/Info"
 import NavBar from "./components/NavBar";
 import RSVP from "./components/RSVP"
 import Statuses from "./components/Statuses"
@@ -61,6 +62,9 @@ function App() {
           }/>
           <Route exact path="/status" element={
             <Statuses user={user}/>
+          }/>
+          <Route exact path="/info" element={
+            <Info user={user}/>
           }/>
           {rsvpPageLink}
           {adminPageLink}

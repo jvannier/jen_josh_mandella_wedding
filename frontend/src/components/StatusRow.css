@@ -5,9 +5,13 @@
 }
 
 #statusTextItem, #editStatus {
-    margin-left: auto;
+    margin-left: auto !important;
 }
 
 .textInput {
     width: 100%;
+}
+
+th {
+    text-align: center !important;
 }

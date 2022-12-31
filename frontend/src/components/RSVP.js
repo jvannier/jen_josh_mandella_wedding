@@ -4,6 +4,7 @@ import RSVPDataStructure from "../dataStructures/rsvp";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+
 function RSVP(props) {
     let [response, setResponse] = useState(false);
     let [songSuggestion, setSongSuggestion] = useState("");
@@ -52,13 +53,13 @@ function RSVP(props) {
                         />
                         <br/>
                         <br/>
-                        <Button id="yesButton" onClick={event => submit(true, event)}>
+                        <Button variant="light" id="yesButton" onClick={event => submit(true, event)}>
                             Yes
                         </Button>
                     </div>
                 </span>
                 <span id="no">
-                    <Button id="noButton" onClick={event => submit(false, event)}>
+                    <Button variant="light" id="noButton" onClick={event => submit(false, event)}>
                         No
                     </Button>
                 </span>

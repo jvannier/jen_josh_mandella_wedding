@@ -35,6 +35,7 @@ function NavBar(props) {
       <Link className="link" id="homeLink" to="/">Home</Link>
       <Link className="link" id="statusLink" to="/status">Status</Link>
       {rsvpPageLink}
+      <Link className="link" id="infoLink" to="/info">Info</Link>
       {adminPageLink}
       <div id="userName">
         {props.user.userName}

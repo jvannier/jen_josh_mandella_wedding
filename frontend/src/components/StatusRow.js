@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import './StatusRow.css';
 import { Td, Tr } from 'react-super-responsive-table';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 
 function StatusRow(props) {
@@ -13,17 +15,18 @@ function StatusRow(props) {
         if (props.user.isAdmin) {
             setStatusTextContainer(
                 <div className="status">
-                    <input
+                    <Form.Control
                         value={text}
                         type="text" className="textInput"
                         onChange={event => {
                             setText(event.target.value);
                         }}
                     />
-                    <input
-                        type="submit" value="Update"
+                    <Button variant="light" className="statusButton"
                         onClick={event => {console.log("TODO: update status in DB (and checked status?")}}
-                    />
+                    >
+                        Update
+                    </Button>
                 </div>
             );
         } else {
@@ -38,8 +41,9 @@ function StatusRow(props) {
         <Tr>
             <Td>
                 <div className="status">
-                    <input
+                    <Form.Check
                         type="checkbox"
+                        label={ checked === true ? "Yes" : "No" }
                         onChange={() => {
                             props.status.setChecked(!checked, props.user);
                             setChecked(!checked);
@@ -47,7 +51,6 @@ function StatusRow(props) {
                         checked={checked}
                         disabled={!props.user.isAdmin}
                     />
-                    { checked === true ? "Yes" : "No" }
                 </div>
             </Td>
             <Td>

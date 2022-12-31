@@ -5,6 +5,7 @@ import StatusRow from "./StatusRow";
 import './Statuses.css';
 import {Table, Thead, Tbody, Th, Tr} from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import Card from 'react-bootstrap/Card';
 
 
 function Statuses(props) {
@@ -35,7 +36,7 @@ function Statuses(props) {
 
     return (
         <div className="page" id="statusPage">
-            <div id="statusText">
+            <Card body id="statusText">
                 <p>
                     We have a wedding planner. She's great.
                     <br/>
@@ -59,7 +60,7 @@ function Statuses(props) {
                         {adminInput}
                     </Tbody>
                 </Table>
-            </div>
+            </Card>
         </div>
     );
 }

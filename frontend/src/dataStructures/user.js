@@ -1,4 +1,5 @@
 import jwt_decode from "jwt-decode";
+import { API_URL } from "./consts";
 
 
 class User {
