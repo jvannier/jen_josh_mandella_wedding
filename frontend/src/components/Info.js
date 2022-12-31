@@ -12,7 +12,7 @@ function Info() {
         "Colors": <Colors/>,
     };  // name to component mapping
 
-    return <NavCard cardComponents={cardComponents}/>
+    return <NavCard cardComponents={cardComponents}/>;
 }
 
 export default Info;

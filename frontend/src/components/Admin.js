@@ -1,18 +1,13 @@
-import React, { useEffect } from "react";
-import './Admin.css';
+import React from "react";
+import NavCard from "./NavCard";
 
 
 function Admin(props) {
-    useEffect(() => {
-        // TODO Fetch status from DB
-        // user specific information?
-    }, []);
+    let cardComponents = {
+        "test": <div>placeholder</div>,
+    };  // name to component mapping
 
-    return (
-        <div className="page" id="adminPage">
-            <p id="adminText">admin stuff</p>
-        </div>
-    );
+    return <NavCard cardComponents={cardComponents}/>;
 }
 
 export default Admin;
