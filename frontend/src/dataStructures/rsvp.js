@@ -2,30 +2,13 @@ import { API_URL } from "./consts";
 
 
 class RSVP {
-    constructor(
-        response, setResponse,
-        food, setFood,
-        songSuggestion, setSongSuggestion,
-        user,
-    ) {
-        this.response = response;
-        this.setResponseState = setResponse;
-        this.food = food;
-        this.setFoodState = setFood;
-        this.songSuggestion = songSuggestion;
-        this.setSongSuggestionState = setSongSuggestion;
-        this.user = user;
-
-        this.getCurrentRSVP();  // Get current RSVP from db
-    }
-    
-    async getCurrentRSVP() {
+    static async getCurrentRSVP(user) {
         // Get current RSVP from API
         // let rsvp = await fetch(
-        //     API_URL + "/rsvp/" + this.user.userID + "/GET",
+        //     API_URL + "/rsvp/" + user.userID + "/GET",
         // );
         // rsvp = await rsvp.json();
-        let rsvp = [1, false, "food", "lalala"]; // TODO: delete this and uncomment above lines when there's stuff in the DB
+        let rsvp = [1, false, "Food", "lalala"]; // TODO: delete this and uncomment above lines when there's stuff in the DB
 
         let response;
         let food;
@@ -41,32 +24,15 @@ class RSVP {
             songSuggestion = rsvp[3];
         }
 
-        this.setResponse(response);
-        this.setFood(food);
-        this.setSongSuggestion(songSuggestion)
+        return [response, food, songSuggestion];
     }
 
-    submit() {
+    static submit(user, response, food, songSuggestion) {
         // TODO: Send update to db
-        console.log("user:", this.user);
-        console.log("rsvp:", this.response);
-        console.log("food:", this.food);
-        console.log("songSuggestion:", this.songSuggestion);
-    }
-
-    setFood(food) {
-        this.food = food;
-        this.setFoodState(food);
-    }
-
-    setResponse(response) {
-        this.response = response;
-        this.setResponseState(response);
-    }
-
-    setSongSuggestion(songSuggestion) {
-        this.songSuggestion = songSuggestion;
-        this.setSongSuggestionState(songSuggestion);
+        console.log("user:", user);
+        console.log("rsvp:", response);
+        console.log("food:", food);
+        console.log("songSuggestion:", songSuggestion);
     }
 }
 

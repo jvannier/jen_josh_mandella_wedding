@@ -16,8 +16,6 @@ class User {
         this.isAdmin = isAdmin;
         this.setIsAdmin = setIsAdmin;
 
-        this.rsvp = null;  // Not set yet
-
         // Try to read from local storage
         this.readFromLocalStorage();
     }

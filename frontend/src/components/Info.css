@@ -1,3 +1,6 @@
 .card {
     margin: auto;
+    padding: auto;
+    background-color: #232022 !important;
+    color: white;
 }

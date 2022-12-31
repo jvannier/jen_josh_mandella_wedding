@@ -1,53 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
+import Colors from "./infoCardComponents/Colors"
+import Hotels from "./infoCardComponents/Hotels"
+import Location from "./infoCardComponents/Location"
 import "./Info.css";
 
 
-function Info(props) {
+function Info() {
+    let [body, setBody] = useState(<Location/>);
+
     return (
-        <div className="paage">
-    <Card>
-      <Card.Header>
-        <Nav variant="tabs" defaultActiveKey="#first">
-          <Nav.Item>
-            <Nav.Link href="#first">Active</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href="#link">Link</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href="#disabled" disabled>
-              Disabled
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </Card.Header>
-      <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
-        <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
-            {/* <Card className="text-center">
-                <Card.Header>Location</Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                        Info
-                    </Card.Text>
-                </Card.Body>
+        <div className="page">
+            <Card>
+            <Card.Header>
+                <Nav
+                    variant="tabs"
+                    defaultActiveKey="#location"
+                    onSelect={eventKey => {
+                        if (eventKey === "location") {
+                            setBody(<Location/>);
+                        } else if (eventKey === "hotels") {
+                            setBody(<Hotels/>);
+                        } else if (eventKey === "colors") {
+                            setBody(<Colors/>);
+                        }
+                    }}
+                >
+                    <Nav.Item>
+                        <Nav.Link eventKey="location" href="#location">Location</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="hotels" href="#hotels">Hotels</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="colors" href="#colors">Colors</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+            </Card.Header>
+            <Card.Body>{body}</Card.Body>
             </Card>
-            <Card className="text-center">
-                <Card.Header>Hotels</Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                        Info
-                    </Card.Text>
-                </Card.Body>
-            </Card> */}
         </div>
     );
 }

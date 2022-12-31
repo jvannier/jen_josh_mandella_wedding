@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./RSVP.css";
 import RSVPDataStructure from "../dataStructures/rsvp";
 import Button from 'react-bootstrap/Button';
@@ -10,24 +10,27 @@ function RSVP(props) {
     let [songSuggestion, setSongSuggestion] = useState("");
     let [food, setFood] = useState("");
 
-    if (props.user.rsvp === null) {
-        props.user.rsvp = new RSVPDataStructure(
-            response, setResponse, food, setFood,
-            songSuggestion, setSongSuggestion, props.user,
-        )
-    }
+    useEffect(() => {
+        async function fetchData() {
+            let [startResponse, startFood, startSongSuggestion] = await RSVPDataStructure.getCurrentRSVP(props.user);
+            setResponse(startResponse);
+            setFood(startFood);
+            setSongSuggestion(startSongSuggestion);
+        }
+        fetchData();
+    }, []);
 
     function submit(response, event) {
         event.preventDefault();
-        props.user.rsvp.setResponse(response);
+        setResponse(response);
 
         // Send to api
-        props.user.rsvp.submit();
+        RSVPDataStructure.submit(props.user, response, food, songSuggestion);
     }
 
     return (
         <div id="rsv">
-            <p id="currentRSVP">Current RSVP: {props.user.rsvp.response ? "Yes" : "No"}</p>
+            <p id="currentRSVP">Current RSVP: {response ? "Yes" : "No"}</p>
             <div className="page" id="rsvpPage">
                 <span id="yes">
                     <div className="rsvpForm">
@@ -35,7 +38,8 @@ function RSVP(props) {
                         <Form.Select
                             aria-label="select dropdown"
                             className="rsvpInput"
-                            onChange={event => props.user.rsvp.setFood(event.target.value)}
+                            value={food}
+                            onChange={event => setFood(event.target.value)}
                         >
                             <option>Open this select menu</option>
                             <option value="Food">Food</option>
@@ -48,8 +52,8 @@ function RSVP(props) {
                         <Form.Control
                             className="rsvpInput"
                             type="text"
-                            value={props.user.rsvp.songSuggestion}
-                            onChange={event => props.user.rsvp.setSongSuggestion(event.target.value)}
+                            value={songSuggestion}
+                            onChange={event => setSongSuggestion(event.target.value)}
                         />
                         <br/>
                         <br/>

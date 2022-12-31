@@ -18,7 +18,7 @@ function App() {
   let user = new User(
     userID, setUserID, userName, setUserName,
     token, setToken, isAdmin, setIsAdmin,
-  );  
+  );
 
   let [adminPageLink, setAdminPageLink] = useState("");
   let [rsvpPageLink, setRsvpPageLink] = useState("");
