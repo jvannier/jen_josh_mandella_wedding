@@ -15,6 +15,8 @@ class User {
         this.isAdmin = isAdmin;
         this.setIsAdmin = setIsAdmin;
 
+        this.rsvp = null;  // Not set yet
+
         // Try to read from local storage
         this.readFromLocalStorage();
     }
@@ -22,21 +24,21 @@ class User {
     setUserID(userID) {
         if (userID !== this.userID) {
             this.setUserIDState(userID);
-            localStorage.setItem("id", this.userID);
+            localStorage.setItem("id", userID);
         }
     }
     
     setUserName(userName) {
         if (userName !== this.userName) {
             this.setUserNameState(userName);
-            localStorage.setItem("userName", this.userName);
+            localStorage.setItem("userName", userName);
         }
     }
     
     setToken(token) {
         if (token !== this.token) {
             this.setTokenState(token);
-            localStorage.setItem("token", this.token);
+            localStorage.setItem("token", token);
         }
     }
 
@@ -45,17 +47,9 @@ class User {
         let userName = localStorage.getItem("userName");
         let token = localStorage.getItem("token");
 
-        if (userID !== this.userID) {
-            this.setUserIDState(userID);
-        }
-
-        if (userName !== this.userName) {
-            this.setUserNameState(userName);
-        }
-
-        if (token !== this.token) {
-            this.setTokenState(token);
-        }
+        this.setUserID(userID);
+        this.setUserName(userName);
+        this.setToken(token);
     }
 
     logout() {
@@ -76,26 +70,28 @@ class User {
 
         // The unique ID of the user's Google Account:
         this.setUserID(responsePayload.sub);
-        this.setUserName(responsePayload.given_name);
+        this.setUserName(responsePayload.name);
 
         // TODO: Call API to update login_expiration_time in DB
         // and get/create token and if isAdmin
         this.setIsAdmin(true);
         this.setToken("tokentotally");
+
+        // TODO: put to user
     }
 
     async isLoggedIn() {
         // TODO: Call API for if logged in (check if token expired)
-        // return new Promise((resolve, reject) => resolve(true));
-        return new Promise((resolve, reject) => resolve(false));
+        return new Promise((resolve, reject) => resolve(true));
+        // return new Promise((resolve, reject) => resolve(false));
     }
 
     async isLoggedInAdmin() {
         // TODO: Call API
-        this.setIsAdmin(false);
+        this.setIsAdmin(true);
         return new Promise((resolve, reject) => resolve({
-            "admin": false,
-            "loggedIn": false,
+            "admin": true,
+            "loggedIn": true,
         }));
     }
 }

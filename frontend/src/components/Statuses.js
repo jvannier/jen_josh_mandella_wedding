@@ -12,7 +12,10 @@ function Statuses(props) {
     let [adminInput, setAdminInput] = useState();
 
     useEffect(() => {
-        setStatusRows(Status.getStatuses(props.user));
+        async function fetchData() {
+            setStatusRows(await Status.getStatuses(props.user));
+        }
+        fetchData();
         // eslint-disable-next-line
     }, []);
 

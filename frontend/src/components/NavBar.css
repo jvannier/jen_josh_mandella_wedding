@@ -9,7 +9,6 @@
 }
 
 .link {
-    color: purple;
     margin: auto;
 }
 
@@ -28,6 +27,10 @@
         background: -webkit-linear-gradient(purple, navy);
         background-clip: text;
     }
+
+    .link {
+        color: purple;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,5 +42,9 @@
     #userName {
         background: -webkit-linear-gradient(lightblue, #CDB0EE);
         background-clip: text;
+    }
+
+    .link {
+        color: lavender;
     }
 }

@@ -1,3 +1,5 @@
+import { API_URL } from "./consts";
+
 class Status {
     static fields = [
         "Done",
@@ -11,13 +13,21 @@ class Status {
         this.text = text;
     }
 
-    static getStatuses(user) {
-        // TODO: Get statuses from DB
+    static async getStatuses(user) {
+        // let statuses = await fetch(API_URL + "/statuses/GET");
+        // statuses = await statuses.json();
+        let statuses = [[1, false, "aa"], [2, true, "bb"]]; // TODO: delete this and uncomment above two lines when there's stuff in the DB
 
-        return [
-            new Status(true, "aaa"),
-            new Status(false, "bbb"),
-        ];
+        let checked;
+        let text;
+        statuses = statuses.map(status => {
+            checked = status[1];
+            text = status[2];
+            return new Status(
+                checked, text,
+            );
+        });
+        return statuses;
     }
 
     setChecked(value, user) {

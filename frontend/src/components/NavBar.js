@@ -31,7 +31,7 @@ function NavBar(props) {
   }, [props.user.userID, props.user.token, props.user.isAdmin]);
 
   return (
-    <span className="NavBar">
+    <nav className="NavBar">
       <Link className="link" id="homeLink" to="/">Home</Link>
       <Link className="link" id="statusLink" to="/status">Status</Link>
       {rsvpPageLink}
@@ -40,7 +40,7 @@ function NavBar(props) {
         {props.user.userName}
       </div>
       <Login user={props.user}/>
-    </span>
+    </nav>
   );
 }
 

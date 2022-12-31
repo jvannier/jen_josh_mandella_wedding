@@ -5,8 +5,8 @@ import { Td, Tr } from 'react-super-responsive-table';
 
 
 function AdminStatusRow(props) {
-    let [checked, setChecked] = useState(false);
-    let [text, setText] = useState("");
+    let [checked, setChecked] = useState(props.checked);
+    let [text, setText] = useState(props.text);
     let newStatus;
 
     const handleSubmit = () => {

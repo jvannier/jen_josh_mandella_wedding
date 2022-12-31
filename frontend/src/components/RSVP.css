@@ -1,22 +1,27 @@
-#rsvpTextYes {
-    margin: auto;
-    color: black;
-}
-
-#rsvpTextNo {
-    margin: auto;
-    color: white;
-}
-
-span {
+#yes, #no {
     display: flex;
-    width: 50%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#currentRSVP {
+    background-color: lavender;
+    margin: auto;
 }
 
 #yes {
-    background-image: linear-gradient(to bottom right, navy, lavender);
+    background-image: linear-gradient(to bottom right, navy, purple);
 }
 
 #no {
     background-image: linear-gradient(to bottom right, gray, black);
+}
+
+.rsvpInput {
+    width: 100%;
+}
+
+#yesButton {
+    float: right;
 }

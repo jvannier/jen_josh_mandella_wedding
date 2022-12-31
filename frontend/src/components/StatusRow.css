@@ -4,6 +4,10 @@
     justify-content: center;
 }
 
+#statusTextItem, #editStatus {
+    margin-left: auto;
+}
+
 .textInput {
     width: 100%;
 }
