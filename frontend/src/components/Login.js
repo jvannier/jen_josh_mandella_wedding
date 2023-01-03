@@ -26,7 +26,7 @@ function Login(props) {
         // eslint-disable-next-line
     }, [props.user.token]);
 
-    if (props.user.token === null || props.user.token === "null") {
+    if (!props.user.token) {
         // Login
         return (
             <span id="googleLogin">

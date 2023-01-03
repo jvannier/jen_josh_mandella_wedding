@@ -14,11 +14,15 @@
 th {
     background-color: rgba(0,0,80,.75);
     color: #EEE1FF;
+    border-width: 1px !important;
+    border-color: black !important;
 }
 
 td {
     background-color: rgba(0,0,150,.75);
     color: #EEE1FF;
+    border-width: 1px !important;
+    border-color: black !important;
 }
 
 .statusButton {

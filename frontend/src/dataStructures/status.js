@@ -17,7 +17,12 @@ class Status {
     static async getStatuses(user) {
         // let statuses = await fetch(API_URL + "/statuses/GET");
         // statuses = await statuses.json();
-        let statuses = [[1, false, "aa"], [2, true, "bb"]]; // TODO: delete this and uncomment above two lines when there's stuff in the DB
+        let statuses = [
+            [1, false, "aa"],
+            [2, true, "bb"],
+            [3, false, "cc"],
+            [4, true, "dd"],
+        ]; // TODO: delete this and uncomment above two lines when there's stuff in the DB
 
         let checked;
         let text;

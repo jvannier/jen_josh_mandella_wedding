@@ -1,0 +1,40 @@
+#statusText {
+    background-color: rgba(0,0,0,.75) !important;
+    margin: auto;
+    color: #EEE1FF;
+    padding: 2%;
+    height: 90%;
+    overflow: scroll;
+}
+
+th {
+    background-color: rgba(0,0,80,.75);
+    color: #EEE1FF;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+td {
+    text-align: center !important;
+    border-width: 1px !important;
+    border-color: black !important;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+#filterButtonWrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.filterButton {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    margin: 1vw 1vh;
+}

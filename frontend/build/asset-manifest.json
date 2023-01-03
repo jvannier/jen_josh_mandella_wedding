@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.78f57b4a.css",
-    "main.js": "/static/js/main.b82c573b.js",
+    "main.css": "/static/css/main.cc10e9b0.css",
+    "main.js": "/static/js/main.731382d3.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/cat_wow.png": "/static/media/cat_wow.d2e741cb768849cbfa05.png",
     "static/media/JJWeddingBanner (LIGHT).png": "/static/media/JJWeddingBanner (LIGHT).5f8404e2cbd46e8efb6b.png",
     "static/media/JJWeddingBanner (DARK).png": "/static/media/JJWeddingBanner (DARK).92abd9c3c86ca572a3c8.png",
     "index.html": "/index.html",
-    "main.78f57b4a.css.map": "/static/css/main.78f57b4a.css.map",
-    "main.b82c573b.js.map": "/static/js/main.b82c573b.js.map",
+    "main.cc10e9b0.css.map": "/static/css/main.cc10e9b0.css.map",
+    "main.731382d3.js.map": "/static/js/main.731382d3.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.78f57b4a.css",
-    "static/js/main.b82c573b.js"
+    "static/css/main.cc10e9b0.css",
+    "static/js/main.731382d3.js"
   ]
 }

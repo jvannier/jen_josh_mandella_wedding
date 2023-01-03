@@ -12,6 +12,13 @@ function StatusRow(props) {
     let [text, setText] = useState(props.status.text);
 
     useEffect(() => {
+        // Using state for checked / text here because props.status isn't in state
+        setText(props.status.text);
+        setChecked(props.status.checked);
+        // eslint-disable-next-line
+    }, [props.status.text, props.status.checked]);
+
+    useEffect(() => {
         if (props.user.isAdmin) {
             setStatusTextContainer(
                 <div className="status">
@@ -35,7 +42,7 @@ function StatusRow(props) {
             );
         }
         // eslint-disable-next-line
-    }, [props.user.isAdmin, text])
+    }, [props.user.isAdmin, checked, text])
 
     return (
         <Tr>
