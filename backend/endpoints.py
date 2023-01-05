@@ -33,6 +33,15 @@ def Welcome():
     return "Welcome to the API!!!"
 
 
+@flask_app.route('/users')
+@cross_origin()
+def Get_Users():
+    cursor.execute("SELECT * FROM UserTable")
+    UserRowTuple = cursor.fetchall()
+    UserRowJson = json.dumps(UserRowTuple)
+    return UserRowJson
+
+
 @flask_app.route('/users/<int:googleid>/GET')
 @cross_origin()
 def Get_User(googleid:int):
@@ -64,6 +73,16 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
     cursor.close()
     conn.close()
     return {}
+
+
+@flask_app.route('/rsvp')
+@cross_origin()
+def Get_RSVPs():
+    cursor.execute("SELECT * FROM PersonalSelections")
+    UserRowTuple = cursor.fetchall()
+    UserRowJson = json.dumps(UserRowTuple)
+    return UserRowJson
+
 
 @flask_app.route('/rsvp/<int:googleid>/GET')
 @cross_origin()

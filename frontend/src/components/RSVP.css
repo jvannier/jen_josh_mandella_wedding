@@ -5,23 +5,44 @@
     align-items: center;
 }
 
+#rsvpPage {
+    height: 88.55vh;
+}
+
 #currentRSVP {
     background-color: lavender;
     margin: auto;
 }
 
 #yes {
-    background-image: linear-gradient(to bottom right, navy, purple);
+    background-image: url("../../assets/Artemis.jpg");
+    background-size: 100% 100%;
+}
+
+#yesCard {
+    background-color: rgba(0,0,0,.85) !important;
+    padding: 2%;
+    margin-top: 6.5%;
 }
 
 #no {
-    background-image: linear-gradient(to bottom right, gray, black);
+    background-image: url("../../assets/HadesPot.jpg");
+    background-size: 100% 100%;
 }
 
 .rsvpInput {
     width: 100%;
 }
 
+.rsvpText {
+    color: white;
+}
+
 #yesButton {
     float: right;
+}
+
+#noButton {
+    border-color: black;
+    border-width: 5px;
 }

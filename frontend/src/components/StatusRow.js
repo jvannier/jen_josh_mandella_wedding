@@ -60,7 +60,7 @@ function StatusRow(props) {
                     />
                 </div>
             </Td>
-            <Td>
+            <Td className="statusTd">
                 {/* <div className="status"> */}
                     {statusTextContainer}
                 {/* </div> */}

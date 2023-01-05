@@ -1,5 +1,5 @@
 #statusPage {
-    background-image: url("../../assets/cat_wow.png");
+    background-image: url("../../assets/CatWow.png");
 }
 
 #statusText {
@@ -21,7 +21,7 @@ th {
 td {
     background-color: rgba(0,0,150,.75);
     color: #EEE1FF;
-    border-width: 1px !important;
+    border-width: 2px !important;
     border-color: black !important;
 }
 
@@ -34,4 +34,24 @@ td {
     padding: 1% !important;
     margin: 0% !important;
     border-radius: 3px !important;
+}
+
+#allFilterButton {
+    background-image: linear-gradient(to bottom right, navy, purple);
+}
+
+#completeFilterButton {
+    background-color: navy;
+    color: lavender;
+}
+
+#incompleteFilterButton {
+    background-image: linear-gradient(to bottom right, rgb(170, 170, 252), rgb(195, 195, 255), purple);
+    /* background-color: lavender; */
+    /* color: navy; */
+    color: black;
+}
+
+#filterButtonWrapper {
+    padding-bottom: 8%;
 }

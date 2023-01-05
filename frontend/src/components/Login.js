@@ -30,7 +30,7 @@ function Login(props) {
         // Login
         return (
             <span id="googleLogin">
-                <GoogleLogin id="googleLogin"
+                <GoogleLogin
                     onSuccess={
                         credentialResponse => props.user.login(credentialResponse)
                     }

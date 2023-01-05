@@ -8,7 +8,10 @@ function Admin(props) {
         "Users": <Users user={props.user}/>,
     };  // name to component mapping
 
-    return <NavCard cardComponents={cardComponents}/>;
+    return <NavCard
+        cardComponents={cardComponents}
+        defaultActiveKey="#Users"
+    />;
 }
 
 export default Admin;

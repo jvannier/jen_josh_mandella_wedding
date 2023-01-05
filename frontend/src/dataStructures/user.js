@@ -1,4 +1,5 @@
 import jwt_decode from "jwt-decode";
+import { getAllRSVPs } from "./rsvp";
 import { API_URL } from "./consts";
 
 
@@ -95,8 +96,8 @@ class User {
 
     async isLoggedIn() {
         // TODO: Call API for if logged in (check if token expired)
-        // return new Promise((resolve, reject) => resolve(true));
-        return new Promise((resolve, reject) => resolve(false));
+        return new Promise((resolve, reject) => resolve(true));
+        // return new Promise((resolve, reject) => resolve(false));
     }
 
     async isLoggedInAdmin() {
@@ -106,8 +107,8 @@ class User {
         return new Promise((resolve, reject) => resolve({
             "admin": false,
             // "admin": true,
-            "loggedIn": false,
-            // "loggedIn": true,
+            // "loggedIn": false,
+            "loggedIn": true,
         }));
     }
 }
@@ -116,10 +117,26 @@ export default User;
 
 
 export let getAllUsers = async (user) => {
-    // TODO: get all users from api
-    // TODO: probably need to convert rsvp from "t" / "f" to "yes"/ "no"
-    return [
-        ["jen", "no", "food", "song"],
-        ["jen1", "yes", "otherFood", "song2"],
-    ];
+    let users = await fetch(API_URL + "/users");
+    users = await users.json();
+    let rsvps = await getAllRSVPs(user);
+
+    users = users.map(user => {
+        let result = [
+            `${user[2]} ${user[3]}`,  // Name
+        ];
+
+        if (user[1] in rsvps) {
+            let rsvp = rsvps[user[1]];
+            result.push(
+                rsvp[1] ? "yes" : "no",  // RSVP
+                rsvp[2],  // Food selection
+                rsvp[3],  // Song Selection
+            )
+        } else {
+            result.push("", "", "");
+        }
+        return result;
+    });
+    return users;
 }

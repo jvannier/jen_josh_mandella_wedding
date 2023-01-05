@@ -1,15 +1,15 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Card from 'react-bootstrap/Card';
 
 
 function Colors(props) {
     return (
-        <Fragment>
+        <div id="colorsPage">
             <Card.Title>Wedding Colors</Card.Title>
             <Card.Text>
                 Navy Blue and Lavender
             </Card.Text>
-        </Fragment>
+        </div>
     );
 }
 

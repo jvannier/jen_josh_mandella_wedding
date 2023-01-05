@@ -10,7 +10,7 @@ function Hotels(props) {
             <Card.Text>
                 Meow
             </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Button variant="primary">Todo</Button>
         </Fragment>
     );
 }

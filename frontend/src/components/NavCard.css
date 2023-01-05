@@ -1,6 +1,35 @@
 .card {
     margin: auto;
     padding: auto;
-    background-color: #232022 !important;
-    color: white;
+}
+
+.card-text, .card-title {
+    display: flex;
+    justify-content: center;
+}
+
+@media (prefers-color-scheme: light) {
+    .navCard {
+        background-image: linear-gradient(to bottom right, lightblue, lavender) !important;
+        color: black;
+    }
+    
+    .nav-link {
+        color: black !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .navCard {
+        background-image: linear-gradient(to bottom right, navy, purple) !important;
+        color: white;
+    }
+
+    .nav-link {
+        color: lavender !important;
+    }
+
+    .nav-link.active {
+        color: black !important;
+    }
 }

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './NavBar.css';
 import Login from "./Login";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 
 function NavBar(props) {
@@ -35,7 +36,11 @@ function NavBar(props) {
       <Link className="link" id="homeLink" to="/">Home</Link>
       <Link className="link" id="statusLink" to="/status">Status</Link>
       {rsvpPageLink}
-      <Link className="link" id="infoLink" to="/info">Info</Link>
+      {/* <Link className="link" id="infoLink" to="/info"> */}
+        <NavDropdown className="link" id="infoLink" title="More Info">
+          <NavDropdown.Item href="/info#Hotels">Hotels</NavDropdown.Item>
+        </NavDropdown>
+      {/* </Link> */}
       {adminPageLink}
       <div id="userName">
         {props.user.userName}

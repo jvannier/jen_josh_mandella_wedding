@@ -49,16 +49,10 @@ function Statuses(props) {
     return (
         <div className="page" id="statusPage">
             <Card body id="statusText">
-                <p>
-                    We have a wedding planner. She's great.
-                    <br/>
-                    <br/>
-                    No, the login button does not work. Yet.
-                </p>
                 <div id="filterButtonWrapper">
-                    <Button className="filterButton" variant="info" onClick={() => setFilter()}>All</Button>
-                    <Button className="filterButton" variant="success" onClick={() => setFilter(true)}>Complete</Button>
-                    <Button className="filterButton" variant="danger" onClick={() => setFilter(false)}>Incomplete</Button>
+                    <Button className="filterButton" id="allFilterButton" onClick={() => setFilter()}>All</Button>
+                    <Button className="filterButton" id="completeFilterButton" onClick={() => setFilter(true)}>Complete</Button>
+                    <Button className="filterButton" id="incompleteFilterButton" onClick={() => setFilter(false)}>Incomplete</Button>
                 </div>
                 <Table role="grid">
                     <Thead>

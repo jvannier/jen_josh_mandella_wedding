@@ -37,3 +37,16 @@ class RSVP {
 }
 
 export default RSVP;
+
+
+
+export let getAllRSVPs = async (user) => {
+    let rsvps = await fetch(API_URL + "/rsvp");
+    rsvps = await rsvps.json();
+
+    let result = [];
+    rsvps.forEach(rsvp => {
+        result[rsvp[4]] = rsvp.slice(0, 4);
+    });
+    return result;
+}

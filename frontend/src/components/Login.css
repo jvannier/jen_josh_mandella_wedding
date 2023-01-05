@@ -1,8 +1,16 @@
 @media (prefers-color-scheme: dark) {
-    [role=button] {
+    #logout {
         border-color: #5A5A5A !important;
         background: #5A5A5A !important;
         color: lightgray !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    #logout {
+        border-color: black !important;
+        background: purple !important;
+        color: lavender !important;
     }
 }
 
