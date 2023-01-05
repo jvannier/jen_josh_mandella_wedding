@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 
-function Hotels(props) {
+function Hotels() {
     return (
         <Fragment>
             <Card.Title>Hotel Options</Card.Title>

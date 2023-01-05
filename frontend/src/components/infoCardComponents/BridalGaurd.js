@@ -1,10 +1,10 @@
 import React from "react";
-import {Table, Thead, Tbody, Td, Th, Tr} from 'react-super-responsive-table';
+import {Table, Tbody, Td, Tr} from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import Card from 'react-bootstrap/Card';
 
 
-function BridalGaurd(props) {
+function BridalGaurd() {
     return (
         <div>
             <Card.Title>Bridal Guard</Card.Title>

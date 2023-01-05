@@ -11,6 +11,7 @@ function Admin(props) {
     return <NavCard
         cardComponents={cardComponents}
         defaultActiveKey="#Users"
+        // useHeader={true}
     />;
 }
 

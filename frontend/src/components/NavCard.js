@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
-import Nav from 'react-bootstrap/Nav';
 import "./NavCard.css";
 
 
 function NavCard(props) {
+    let location = useLocation();
     let componentNames = Object.entries(props.cardComponents).map(component => {
         return component[0];  // component name
     });
@@ -12,30 +13,16 @@ function NavCard(props) {
     let [body, setBody] = useState(props.cardComponents[componentNames[0]]);
 
     useEffect(() => {
-        if (window.location.hash) {
-            let tab = decodeURI(window.location.hash.slice(1));
+        if (location) {
+            let tab = decodeURI(location.hash.slice(1));
             setBody(props.cardComponents[tab]);
         }
-    }, [window.location.hash]);
+        // eslint-disable-next-line
+    }, [location]);
 
     return (
         <div className="page">
             <Card className="navCard">
-                <Card.Header>
-                    <Nav
-                        variant="tabs"
-                        defaultActiveKey={props.defaultActiveKey}
-                        onSelect={eventKey => setBody(props.cardComponents[eventKey])}
-                    >
-                        {
-                            componentNames.map(name => {
-                                return <Nav.Item key={name}>
-                                    <Nav.Link eventKey={name} href={"#" + name}>{name}</Nav.Link>
-                                </Nav.Item>
-                            })
-                        }
-                    </Nav>
-                </Card.Header>
                 <Card.Body>{body}</Card.Body>
             </Card>
         </div>

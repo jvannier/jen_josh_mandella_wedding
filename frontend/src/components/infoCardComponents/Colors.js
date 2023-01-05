@@ -2,7 +2,7 @@ import React from "react";
 import Card from 'react-bootstrap/Card';
 
 
-function Colors(props) {
+function Colors() {
     return (
         <div id="colorsPage">
             <Card.Title>Wedding Colors</Card.Title>

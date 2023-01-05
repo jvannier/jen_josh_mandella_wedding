@@ -19,7 +19,7 @@ function RSVP(props) {
             setSongSuggestion(startSongSuggestion);
         }
         fetchData();
-    }, []);
+    }, [props.user]);
 
     function submit(response, event) {
         event.preventDefault();

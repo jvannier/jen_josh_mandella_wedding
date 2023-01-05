@@ -96,8 +96,8 @@ class User {
 
     async isLoggedIn() {
         // TODO: Call API for if logged in (check if token expired)
-        return new Promise((resolve, reject) => resolve(true));
-        // return new Promise((resolve, reject) => resolve(false));
+        // return new Promise((resolve, reject) => resolve(true));
+        return new Promise((resolve, reject) => resolve(false));
     }
 
     async isLoggedInAdmin() {
@@ -107,8 +107,8 @@ class User {
         return new Promise((resolve, reject) => resolve({
             "admin": false,
             // "admin": true,
-            // "loggedIn": false,
-            "loggedIn": true,
+            "loggedIn": false,
+            // "loggedIn": true,
         }));
     }
 }

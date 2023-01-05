@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 
-function Location(props) {
+function Location() {
     return (
         <Fragment>
             <Card.Title>Rooster Tail Fairy Tail Weddings</Card.Title>

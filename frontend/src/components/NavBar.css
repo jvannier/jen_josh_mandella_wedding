@@ -20,7 +20,7 @@
 }
 
 @media (prefers-color-scheme: light) {
-    .NavBar {
+    .dropdown-menu, .NavBar {
         background-color: white;
         background-image: linear-gradient(to bottom right, white, white, #CDB0EE);
     }
@@ -30,13 +30,18 @@
         background-clip: text;
     }
 
-    .link {
-        color: purple;
+    .nav-link, .dropdown-item, .link {
+        color: purple !important;
+    }
+
+    .dropdown-item:hover {
+        background-color: navy !important;
+        color: white !important;
     }
 }
 
 @media (prefers-color-scheme: dark) {
-    .NavBar {
+    .dropdown-menu, .NavBar {
         background-color: black;
         background-image: linear-gradient(to bottom right, black, black, navy);
     }
@@ -46,7 +51,12 @@
         background-clip: text;
     }
 
-    .link {
-        color: lavender;
+    .nav-link, .dropdown-item, .link {
+        color: lavender !important;
+    }
+
+    .dropdown-item:hover {
+        background-color: lavender !important;
+        color: black !important;
     }
 }

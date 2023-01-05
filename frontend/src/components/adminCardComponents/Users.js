@@ -3,6 +3,7 @@ import {Table, Thead, Tbody, Td, Th, Tr} from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import { getAllUsers } from "../../dataStructures/user";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import "./Users.css";
 
 
@@ -33,6 +34,7 @@ function Users(props) {
 
     return (
         <Fragment>
+            <Card.Title>Users</Card.Title>
             <div id="filterButtonWrapper">
                 <Button className="filterButton" variant="info" onClick={() => setFilter()}>All</Button>
                 <Button className="filterButton" variant="success" onClick={() => setFilter("yes")}>RSVP Yes</Button>
