@@ -1,5 +1,5 @@
 .page {
-  height: 91vh;
+  height: 92.82vh;
   background-size: 100vw 100%;
   display: flex;
 }
@@ -7,12 +7,14 @@
 .App {
   min-height: 100vh;
   height: 100vh;
-  font-size: calc(10px + 2vmin);
-  font-family: Arial;
+}
+
+.button {
+  margin: auto !important;
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 @media (prefers-color-scheme: light) {

@@ -1,6 +1,8 @@
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import React, { useEffect } from "react";
 import "./Login.css";
+import Button from "react-bootstrap/Button"
+// TODO: Custom login button
 
 
 function Login(props) {
@@ -24,11 +26,11 @@ function Login(props) {
         // eslint-disable-next-line
     }, [props.user.token]);
 
-    if (props.user.token === null) {
+    if (!props.user.token) {
         // Login
         return (
             <span id="googleLogin">
-                <GoogleLogin id="googleLogin"
+                <GoogleLogin
                     onSuccess={
                         credentialResponse => props.user.login(credentialResponse)
                     }
@@ -43,7 +45,7 @@ function Login(props) {
         // Logout
         return (
             // eslint-disable-next-line
-            <button role="button" id="logout" onClick={logout}>Logout</button>
+            <Button role="button" id="logout" onClick={logout}>Logout</Button>
         );
     }
 }

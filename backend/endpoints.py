@@ -8,7 +8,6 @@ from flask import (
     make_response,
 )
 from flask_cors import cross_origin
-from flask_request_arg import request_arg
 from flask import Response
 
 from . import flask_app
@@ -32,7 +31,6 @@ cursor = conn.cursor()
 @cross_origin()
 def Welcome():
     return "Welcome to the API!!!"
-
 
 @flask_app.route('/users/<int:googleid>', methods = ['GET'])
 @cross_origin()

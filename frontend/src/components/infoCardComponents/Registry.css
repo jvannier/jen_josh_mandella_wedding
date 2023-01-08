@@ -1,0 +1,18 @@
+#registryButton {
+    display: flex;
+    justify-content: center !important;
+}
+
+@media (prefers-color-scheme: light) {
+    #registryButton {
+        background-image: linear-gradient(to bottom right, navy, purple) !important;
+        color: white !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    #registryButton {
+        background-image: linear-gradient(to bottom right, lightblue, lavender) !important;
+        color: black !important;
+    }
+}

@@ -5,16 +5,32 @@ import StatusRow from "./StatusRow";
 import './Statuses.css';
 import {Table, Thead, Tbody, Th, Tr} from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 
 function Statuses(props) {
     let [statusRows, setStatusRows] = useState([]);
     let [adminInput, setAdminInput] = useState();
+    let [filter, setFilter] = useState();
 
     useEffect(() => {
-        setStatusRows(Status.getStatuses(props.user));
+        async function fetchData() {
+            let statuses = await Status.getStatuses(props.user);
+            
+            if (filter !== undefined) {
+                statuses = statuses.filter(status => {
+                    return status.checked === filter ? true : false;
+                });
+            }
+            statuses = statuses.map((status, index) => (
+                <StatusRow key={index} user={props.user} status={status}/>
+            ));
+            setStatusRows(statuses);
+        }
+        fetchData();
         // eslint-disable-next-line
-    }, []);
+    }, [filter, props.user]);
 
     useEffect(() => {
         if (props.user.isAdmin) {
@@ -28,17 +44,16 @@ function Statuses(props) {
             setAdminInput();
         }
         // eslint-disable-next-line
-    }, [props.user.isAdmin])
+    }, [props.user.isAdmin]);
 
     return (
         <div className="page" id="statusPage">
-            <div id="statusText">
-                <p>
-                    We have a wedding planner. She's great.
-                    <br/>
-                    <br/>
-                    No, the login button does not work. Yet.
-                </p>
+            <Card body id="statusText">
+                <div id="filterButtonWrapper">
+                    <Button className="filterButton" id="allFilterButton" onClick={() => setFilter()}>All</Button>
+                    <Button className="filterButton" id="completeFilterButton" onClick={() => setFilter(true)}>Complete</Button>
+                    <Button className="filterButton" id="incompleteFilterButton" onClick={() => setFilter(false)}>Incomplete</Button>
+                </div>
                 <Table role="grid">
                     <Thead>
                         <Tr>
@@ -50,13 +65,11 @@ function Statuses(props) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {statusRows.map((status, index) => (
-                            <StatusRow key={index} user={props.user} status={status}/>
-                        ))}
+                        {statusRows}
                         {adminInput}
                     </Tbody>
                 </Table>
-            </div>
+            </Card>
         </div>
     );
 }
