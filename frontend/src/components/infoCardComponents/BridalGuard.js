@@ -2,18 +2,15 @@ import React from "react";
 import {Table, Tbody, Td, Tr} from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import Card from 'react-bootstrap/Card';
+import "./BridalGuard.css"
 
 
-function BridalGaurd() {
+function BridalGuard() {
     return (
         <div>
             <Card.Title>Bridal Guard</Card.Title>
-            <Card.Text>
-                Todo: explanation: of gender neutral stuff bridal guard
-                todo: Q&A section?
-                todo: add header for role + name
-
-                -- drop down by more info with the sub sections (link to them - my anchors don't work right now)
+            <Card.Text id="explanation">
+                In the interest of inclusivity, fun, and minor rebellion we have decided to collectively call "bridesmaids" and "groomsmen" the "bridal party". The "maid of honor" is the "Captain of the Guard". Sounds cool to us.
             </Card.Text>
                 <Table role="grid">
                 <Tbody>
@@ -26,7 +23,7 @@ function BridalGaurd() {
                         <Td>Chris Quan Lee</Td>
                     </Tr>
                     <Tr>
-                        <Td>Bridal Captain</Td>
+                        <Td>Captain of the Guard</Td>
                         <Td>Tali Ram</Td>
                     </Tr>
                     <Tr>
@@ -63,4 +60,4 @@ function BridalGaurd() {
     );
 }
 
-export default BridalGaurd;
+export default BridalGuard;

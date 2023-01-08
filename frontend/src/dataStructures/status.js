@@ -1,4 +1,4 @@
-import { API_URL } from "./consts";
+import { get } from "../apiUtil";
 
 
 class Status {
@@ -15,20 +15,14 @@ class Status {
     }
 
     static async getStatuses(user) {
-        // let statuses = await fetch(API_URL + "/statuses/GET");
-        // statuses = await statuses.json();
-        let statuses = [
-            [1, false, "aa"],
-            [2, true, "bb"],
-            [3, false, "cc"],
-            [4, true, "dd"],
-        ]; // TODO: delete this and uncomment above two lines when there's stuff in the DB
+        let statuses = await get(user, "/statuses/GET");
+        statuses = await statuses.json();
 
         let checked;
         let text;
         statuses = statuses.map(status => {
-            checked = status[1];
-            text = status[2];
+            checked = status[2];
+            text = status[1];
             return new Status(
                 checked, text,
             );

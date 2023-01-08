@@ -1,9 +1,10 @@
 import React from "react";
 import NavCard from "./NavCard";
-import BridalGaurd from "./infoCardComponents/BridalGaurd";
+import BridalGuard from "./infoCardComponents/BridalGuard";
 import Colors from "./infoCardComponents/Colors";
 import Hotels from "./infoCardComponents/Hotels";
 import Location from "./infoCardComponents/Location";
+import QA from "./infoCardComponents/Q&A";
 import Registry from "./infoCardComponents/Registry";
 
 
@@ -13,7 +14,8 @@ function Info() {
         "Hotels": <Hotels/>,
         "Colors": <Colors/>,
         "Wedding Registry": <Registry/>,
-        "Wedding Party": <BridalGaurd/>,
+        "Wedding Party": <BridalGuard/>,
+        "Q & A": <QA/>,
     };  // name to component mapping
 
     return <NavCard

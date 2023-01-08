@@ -15,7 +15,7 @@ function Users(props) {
         async function fetchUsers() {
             if (props.user.isLoggedInAdmin()) {
                 // Get users from database
-                let users = await getAllUsers(undefined);
+                let users = await getAllUsers(props.user);
 
                 if (filter) {
                     users = users.filter(user => {

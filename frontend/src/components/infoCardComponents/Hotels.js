@@ -8,7 +8,7 @@ function Hotels() {
         <Fragment>
             <Card.Title>Hotel Options</Card.Title>
             <Card.Text>
-                Meow
+                Todo
             </Card.Text>
             <Button variant="primary">Todo</Button>
         </Fragment>

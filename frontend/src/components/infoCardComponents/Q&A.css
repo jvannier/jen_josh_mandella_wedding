@@ -1,0 +1,18 @@
+.questionCard {
+    display: flex;
+    justify-content: center !important;
+    background-color: inherit !important;
+    margin: 2%;
+}
+
+@media (prefers-color-scheme: light) {
+    .questionCard {
+        color: black !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .questionCard {
+        color: white !important;
+    }
+}

@@ -1,0 +1,22 @@
+#locationText {
+    text-align: center;
+}
+
+#locationButton {
+    display: flex;
+    justify-content: center !important;
+}
+
+@media (prefers-color-scheme: light) {
+    #locationButton {
+        background-image: linear-gradient(to bottom right, navy, purple) !important;
+        color: white !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    #locationButton {
+        background-image: linear-gradient(to bottom right, lightblue, lavender) !important;
+        color: black !important;
+    }
+}
