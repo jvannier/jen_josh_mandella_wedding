@@ -15,7 +15,7 @@ function Location() {
                 </Card.Text>
             </Card.Body>
             <Card.Text>
-                Please arrive at between 5pm and 5:30pm. The ceremony will start at 5:30pm. The reception will start at 6pm and end at -TODO-pm.
+                Please arrive at between 5pm and 5:30pm. The ceremony will start at 5:30pm. The reception will start at 6pm and end at 11pm.
             </Card.Text>
             <Button
                 className="cardButton"

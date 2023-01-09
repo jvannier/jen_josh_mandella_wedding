@@ -9,6 +9,7 @@ import User from "./dataStructures/user"
 import './App.css';
 
 
+// TODO: change tab icon
 function App() {
   let [userID, setUserID] = useState();
   let [userName, setUserName] = useState();

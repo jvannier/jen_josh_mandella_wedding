@@ -27,12 +27,32 @@ conn = psycopg2.connect(
 )
 cursor = conn.cursor()
 
+
 @flask_app.route('/api')
 @cross_origin()
 def Welcome():
     return "Welcome to the API!!!"
 
-@flask_app.route('/users/<int:googleid>', methods = ['GET'])
+
+@flask_app.route('/users')
+@cross_origin()
+def Get_Users():
+    cursor.execute("SELECT * FROM UserTable")
+    UserRowTuple = cursor.fetchall()
+    UserRowJson = json.dumps(UserRowTuple)
+    return UserRowJson
+
+
+@flask_app.route('/rsvp')
+@cross_origin()
+def Get_RSVPs():
+    cursor.execute("SELECT * FROM PersonalSelections")
+    UserRowTuple = cursor.fetchall()
+    UserRowJson = json.dumps(UserRowTuple)
+    return UserRowJson
+
+
+@flask_app.route('/users/<int:googleid>/GET')
 @cross_origin()
 def Get_User(googleid:int):
     cursor.execute("SELECT * FROM UserTable WHERE googleid= (%s)", ( str(googleid),))

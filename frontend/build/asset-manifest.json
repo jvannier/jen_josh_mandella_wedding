@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.2e0bb1ee.css",
-    "main.js": "/static/js/main.f9059bc0.js",
+    "main.css": "/static/css/main.7eef9a68.css",
+    "main.js": "/static/js/main.55a57fa7.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/ArtemisBox.jpg": "/static/media/ArtemisBox.a937f29e5d0d485bec5d.jpg",
     "static/media/Artemis.jpg": "/static/media/Artemis.175236363d59e9f7cafc.jpg",
@@ -10,12 +10,12 @@
     "static/media/JJWeddingBanner (LIGHT).png": "/static/media/JJWeddingBanner (LIGHT).5f8404e2cbd46e8efb6b.png",
     "static/media/JJWeddingBanner (DARK).png": "/static/media/JJWeddingBanner (DARK).92abd9c3c86ca572a3c8.png",
     "index.html": "/index.html",
-    "main.2e0bb1ee.css.map": "/static/css/main.2e0bb1ee.css.map",
-    "main.f9059bc0.js.map": "/static/js/main.f9059bc0.js.map",
+    "main.7eef9a68.css.map": "/static/css/main.7eef9a68.css.map",
+    "main.55a57fa7.js.map": "/static/js/main.55a57fa7.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2e0bb1ee.css",
-    "static/js/main.f9059bc0.js"
+    "static/css/main.7eef9a68.css",
+    "static/js/main.55a57fa7.js"
   ]
 }

@@ -32,12 +32,16 @@ class Status {
 
     setChecked(value, user) {
         this.checked = value;
-
-        // TODO: Update status in DB
+        this.submit(user);  // Update DB
     }
 
     addStatusInDB(user) {
         // TODO: Store new row data in DB
+    }
+
+    async submit(user) {
+        // TODO: Update status in DB
+        console.log("TODO: submit", this.checked, this.text)
     }
 }
 
