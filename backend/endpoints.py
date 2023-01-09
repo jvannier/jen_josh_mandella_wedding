@@ -9,11 +9,11 @@ from flask import (
 )
 from flask_cors import cross_origin
 from flask import Response
-
 from . import flask_app
-
+from time import time
 import os
 import psycopg2
+import backend.tokens
 from psycopg2.extensions import parse_dsn
 
 temp = os.environ['DATABASE_URL']
@@ -58,11 +58,22 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
     isadmin = request.args.get("isadmin")
     accountcreated = request.args.get("accountcreated")
     lastlogin = request.args.get("lastlogin")
-    cursor.execute("INSERT INTO UserTable (id, googleid, firstname, lastname, isadmin, accountcreated, lastlogin) VALUES(%s, %s, %s, %s, %s, %s, %s)", (int(max_int), str(googleid), str(firstname), str(lastname), str(isadmin), str(accountcreated), str(lastlogin),))
-    conn.commit()
+    expiration = request.args.get("expiration")
+    cursor.execute("SELECT googleid FROM UserTable WHERE googleid = (%s)", str(googleid))
+    user_exists = cursor.fetchone()
+    if(user_exists == None):
+        cursor.execute("INSERT INTO UserTable (id, googleid, firstname, lastname, isadmin, accountcreated, lastlogin) VALUES(%s, %s, %s, %s, %s, %s, %s)", (int(max_int), str(googleid), str(firstname), str(lastname), str(isadmin), str(accountcreated), str(lastlogin),))
+        conn.commit()
+        backend.tokens.Generate_Token(googleid, cursor, expiration)
+        conn.commit()
 #    cursor.close() currently closing here causes issues with continuous website use; need to impliment clean up seperately
 #    conn.close()
-    return {}
+    else:
+        backend.tokens.Generate_Token(googleid, cursor, expiration)
+        conn.commit()
+    cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = (%s)", str(googleid))
+    admin = cursor.fetchone()
+    return '{"loggedin":"true", "isadmin":admin}'
 
 @flask_app.route('/rsvp/<int:googleid>', methods = ['GET'])
 @cross_origin()
@@ -106,3 +117,24 @@ def Put_User():
     cursor.execute("INSERT INTO UserTable (id, googleid, firstname, lastname, isadmin, accountcreated, lastlogin) VALUES(%s, %s, %s, %s, %s, %s, %s)", ())
     return 0
 '''
+
+@flask_app.route('/token', methods = ['GET'])
+@cross_origin()
+def Get_Token():
+    googleid = request.args.get("googleid")
+    users_token = request.args.get("token")
+    cursor.execute("SELECT Expiration FROM Token WHERE ID = (%s)", str(googleid))
+    expire = cursor.fetchone()
+    epoch_time = int(time())
+    if(epoch_time >= expire):
+        cursor.execute("DELETE FROM Token WHERE ID = (%s)", str(googleid))
+    cursor.execute("SELECT Token FROM Token WHERE ID = (%s)", str(googleid))
+    token = cursor.fetchone()
+    if(token == None):
+        return '{"loggedin":"false", "admin":"false"}'
+    elif(token == users_token):
+        cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = (%s)", str(googleid))
+        admin = cursor.fetchone()
+        return '{"loggedin":"true", "admin":admin}'
+    else:
+        return '{"loggedin":"false","admin":"false"}'
