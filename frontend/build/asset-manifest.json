@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.7f68b3e7.css",
-    "main.js": "/static/js/main.2d474a40.js",
+    "main.css": "/static/css/main.2e0bb1ee.css",
+    "main.js": "/static/js/main.b3d99a9d.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/ArtemisBox.jpg": "/static/media/ArtemisBox.a937f29e5d0d485bec5d.jpg",
     "static/media/Artemis.jpg": "/static/media/Artemis.175236363d59e9f7cafc.jpg",
     "static/media/HadesPot.jpg": "/static/media/HadesPot.414c54abf76dc2eb01d4.jpg",
     "static/media/CatWow.png": "/static/media/CatWow.d2e741cb768849cbfa05.png",
     "static/media/JJWeddingBanner (LIGHT).png": "/static/media/JJWeddingBanner (LIGHT).5f8404e2cbd46e8efb6b.png",
     "static/media/JJWeddingBanner (DARK).png": "/static/media/JJWeddingBanner (DARK).92abd9c3c86ca572a3c8.png",
     "index.html": "/index.html",
-    "main.7f68b3e7.css.map": "/static/css/main.7f68b3e7.css.map",
-    "main.2d474a40.js.map": "/static/js/main.2d474a40.js.map",
+    "main.2e0bb1ee.css.map": "/static/css/main.2e0bb1ee.css.map",
+    "main.b3d99a9d.js.map": "/static/js/main.b3d99a9d.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f68b3e7.css",
-    "static/js/main.2d474a40.js"
+    "static/css/main.2e0bb1ee.css",
+    "static/js/main.b3d99a9d.js"
   ]
 }

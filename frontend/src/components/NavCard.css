@@ -1,11 +1,23 @@
 .card {
     margin: auto;
     padding: auto;
+    max-height: 90vh;
+}
+
+.card-body {
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .card-text, .card-title {
     display: flex;
     justify-content: center;
+    text-align: center;
+}
+
+.cardButton {
+    display: flex !important;
+    justify-content: center !important;
 }
 
 @media (prefers-color-scheme: light) {
@@ -16,6 +28,11 @@
     
     .nav-link {
         color: black !important;
+    }
+
+    .cardButton {
+        background-image: linear-gradient(to bottom right, navy, purple) !important;
+        color: white !important;
     }
 }
 
@@ -31,5 +48,11 @@
 
     .nav-link.active {
         color: black !important;
+    }
+
+    .cardButton {
+        background-image: linear-gradient(to bottom right, #CC92F8, lavender) !important;
+        color: black !important;
+        border: blue;
     }
 }

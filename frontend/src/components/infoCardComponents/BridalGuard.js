@@ -2,14 +2,13 @@ import React from "react";
 import {Table, Tbody, Td, Tr} from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import Card from 'react-bootstrap/Card';
-import "./BridalGuard.css"
 
 
 function BridalGuard() {
     return (
         <div>
             <Card.Title>Bridal Guard</Card.Title>
-            <Card.Text id="explanation">
+            <Card.Text>
                 In the interest of inclusivity, fun, and minor rebellion we have decided to collectively call "bridesmaids" and "groomsmen" the "bridal party". The "maid of honor" is the "Captain of the Guard". Sounds cool to us.
             </Card.Text>
                 <Table role="grid">
