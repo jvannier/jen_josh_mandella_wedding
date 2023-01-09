@@ -73,7 +73,7 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
         conn.commit()
     cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = (%s)", str(googleid))
     admin = cursor.fetchone()
-    return '{"loggedin":"true", "isadmin":admin}'
+    return {"loggedin":True, "isadmin":admin}
 
 @flask_app.route('/rsvp/<int:googleid>', methods = ['GET'])
 @cross_origin()
@@ -131,13 +131,13 @@ def Get_Token():
     cursor.execute("SELECT Token FROM Token WHERE ID = (%s)", str(googleid))
     token = cursor.fetchone()
     if(token == None):
-        return '{"loggedin":"false", "admin":"false"}'
+        return {"loggedin":False, "admin":"false"}
     elif(token == users_token):
         cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = (%s)", str(googleid))
         admin = cursor.fetchone()
-        return '{"loggedin":"true", "admin":admin}'
+        return {"loggedin":True, "admin":admin}
     else:
-        return '{"loggedin":"false","admin":"false"}'
+        return {"loggedin":False,"admin":"false"}
 
 @flsk_app.route('/users')
 @cross_origin()
