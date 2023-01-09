@@ -32,17 +32,7 @@ cursor = conn.cursor()
 def Welcome():
     return "Welcome to the API!!!"
 
-
-@flask_app.route('/users')
-@cross_origin()
-def Get_Users():
-    cursor.execute("SELECT * FROM UserTable")
-    UserRowTuple = cursor.fetchall()
-    UserRowJson = json.dumps(UserRowTuple)
-    return UserRowJson
-
-
-@flask_app.route('/users/<int:googleid>/GET')
+@flask_app.route('/users/<int:googleid>', methods = ['GET'])
 @cross_origin()
 def Get_User(googleid:int):
     cursor.execute("SELECT * FROM UserTable WHERE googleid= (%s)", ( str(googleid),))
@@ -50,7 +40,7 @@ def Get_User(googleid:int):
     UserRowJson = json.dumps(UserRowTuple)
     return UserRowJson
 
-@flask_app.route('/users/PUT', methods = ['PUT'])
+@flask_app.route('/users', methods = ['PUT'])
 @cross_origin()
 def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountcreated:str, lastlogin:str):
     cursor.execute("SELECT MAX(id) FROM UserTable") #learned about serial after this implimentation
@@ -70,21 +60,11 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
     lastlogin = request.args.get("lastlogin")
     cursor.execute("INSERT INTO UserTable (id, googleid, firstname, lastname, isadmin, accountcreated, lastlogin) VALUES(%s, %s, %s, %s, %s, %s, %s)", (int(max_int), str(googleid), str(firstname), str(lastname), str(isadmin), str(accountcreated), str(lastlogin),))
     conn.commit()
-    cursor.close()
-    conn.close()
+#    cursor.close() currently closing here causes issues with continuous website use; need to impliment clean up seperately
+#    conn.close()
     return {}
 
-
-@flask_app.route('/rsvp')
-@cross_origin()
-def Get_RSVPs():
-    cursor.execute("SELECT * FROM PersonalSelections")
-    UserRowTuple = cursor.fetchall()
-    UserRowJson = json.dumps(UserRowTuple)
-    return UserRowJson
-
-
-@flask_app.route('/rsvp/<int:googleid>/GET')
+@flask_app.route('/rsvp/<int:googleid>', methods = ['GET'])
 @cross_origin()
 def Get_RSVP(googleid:int):
     cursor.execute("SELECT * FROM PersonalSelections WHERE UserID= (%s)", (str(googleid),))
@@ -92,10 +72,10 @@ def Get_RSVP(googleid:int):
     UserRowJson = json.dumps(UserRowTuple)
     return UserRowJson
 
-@flask_app.route('/rsvp/PUT', methods = ['PUT'])
+@flask_app.route('/rsvp', methods = ['PUT'])
 @cross_origin()
 def Put_RSVP():
-    cursor.execute("SELECT MAX(id) FROM UserTable") #learned about serial after this implimentation
+    cursor.execute("SELECT MAX(id) FROM PersonalSelections") #learned about serial after this implimentation
     max_id = cursor.fetchone()
     max_int = list(max_id)
     if len(max_int) == 0:
@@ -110,11 +90,9 @@ def Put_RSVP():
     googleid = request.args.get("googleid")
     cursor.execute("INSERT INTO UserTable (id, rsvp, mealselect, weddingsong, userid) VALUES(%s, %s, %s, %s, %s)", (int(max_int), str(RSVP), str(MealSelect), str(WeddingSong), str(googleid),))
     conn.commit()
-    cursor.close()
-    conn.close()
     return {}
 
-@flask_app.route('/statuses/GET')
+@flask_app.route('/statuses', methods = ['GET'])
 @cross_origin()
 def Get_Statuses():
     cursor.execute("SELECT * FROM Checklist")
