@@ -10,7 +10,7 @@ function Registry() {
             <iframe
                 id="weddingIframe"
                 title="Wedding Registry"
-                src="https://registry.theknot.com/jennifer-vannier-josh-mandella-march-2024-mi/57972317"
+                src="https://registry.theknot.com/jen-vannier-josh-mandella-july-2023-mi/57972317"
             />
         </div>
     );
