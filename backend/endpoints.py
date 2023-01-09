@@ -138,3 +138,19 @@ def Get_Token():
         return '{"loggedin":"true", "admin":admin}'
     else:
         return '{"loggedin":"false","admin":"false"}'
+
+@flsk_app.route('/users')
+@cross_origin()
+def Get_Users():
+    cursor.execute("SELECT * FROM UserTable")
+    UserRowTuple = cursor.fetchall()
+    UserRowJson = json.dumps(UserRowTuple)
+    return UserRowJson
+
+@flask_app.route('/rsvp')
+@cross_origin()
+def Get_RSVPs():
+    cursor.execute("SELECT * FROM PersonalSelections")
+    UserRowTuple = cursor.fetchall()
+    UserRowJson = json.dumps(UserRowTuple)
+    return UserRowJson
