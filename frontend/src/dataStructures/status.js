@@ -15,7 +15,7 @@ class Status {
     }
 
     static async getStatuses(user) {
-        let statuses = await get(user, "/statuses/GET");
+        let statuses = await get(user, "/statuses");
         statuses = await statuses.json();
 
         let checked;

@@ -4,7 +4,7 @@ import { get, put } from "../apiUtil";
 class RSVP {
     static async getCurrentRSVP(user) {
         // Get current RSVP from API
-        // let rsvp = await get(user, "/rsvp/" + user.userID + "/GET");
+        // let rsvp = await get(user, "/rsvp/" + user.userID);
         // rsvp = await rsvp.json();
         let rsvp = [1, false, "Food", "lalala"]; // TODO: delete this and uncomment above lines when there's stuff in the DB
 

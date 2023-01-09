@@ -78,7 +78,7 @@ class User {
             ["lastlogin", "1770-01-01"],  // TODO: SHOULDN'T BE A QUERY PARAM
             // ["expiration_date", responsePayload.exp],  // TODO. Note: is an integer
         ];
-        // await put(-1, "/users/PUT", queryParams);  // TODO: when endpoint works
+        // await put(-1, "/users", queryParams);  // TODO: when endpoint works
 
         this.setUserID(responsePayload.sub);
         this.setUserName(responsePayload.name);
