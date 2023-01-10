@@ -14,7 +14,7 @@ function QA() {
             <span>
                 Please arrive between 5pm and 5:30pm if you plan to attend the ceremony. If you plan to attend just the reception please arrive any time between 6pm and 11pm.
                 <Button className="cardButton" href={`${API_URL}/info#Location`}>
-                    See here for further information.
+                    Click here for further information.
                 </Button>
             </span>
         ],
