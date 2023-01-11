@@ -123,23 +123,10 @@ def Put_User():
 def Get_Token():
     googleid = request.args.get("googleid")
     users_token = request.args.get("token")
-    cursor.execute("SELECT Expiration FROM Token WHERE ID = (%s)", str(googleid))
-    expire = cursor.fetchone()
-    epoch_time = int(time())
-    if(epoch_time >= expire):
-        cursor.execute("DELETE FROM Token WHERE ID = (%s)", str(googleid))
-    cursor.execute("SELECT Token FROM Token WHERE ID = (%s)", str(googleid))
-    token = cursor.fetchone()
-    if(token == None):
-        return {"loggedin":False, "admin":"false"}
-    elif(token == users_token):
-        cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = (%s)", str(googleid))
-        admin = cursor.fetchone()
-        return {"loggedin":True, "admin":admin}
-    else:
-        return {"loggedin":False,"admin":"false"}
+    admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
+    return admin
 
-@flsk_app.route('/users')
+@flask_app.route('/users')
 @cross_origin()
 def Get_Users():
     cursor.execute("SELECT * FROM UserTable")
