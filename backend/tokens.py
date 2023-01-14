@@ -2,8 +2,8 @@ import random
 
 def Generate_Token(googleid:str, cursor, expiration:int):
     token = random.randint(0,99999999)
-    cursor.execute("SELECT Token FROM Token WHERE ID = (%s)", str(googleid))
-    token_exist = cursor.fetchone()[0]
+    cursor.execute("SELECT Token FROM Token WHERE ID='{}'" .format(googleid))
+    token_exist = cursor.fetchone()
     if(token_exist is None):
         cursor.execute("INSERT INTO Token(ID, Token, Expiration, UserID) VALUES(%s, %s, %s, %s)", (str(googleid), int(token), int(expiration), int(100),))
     else:

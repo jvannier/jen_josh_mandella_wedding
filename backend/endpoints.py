@@ -60,13 +60,15 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
     googleid = request.args.get("googleid")
     firstname = request.args.get("firstname")
     lastname = request.args.get("lastname")
-    isadmin = request.args.get("isadmin")
-    accountcreated = request.args.get("accountcreated")
+    isadmin = False
+#    accountcreated = request.args.get("accountcreated")
     lastlogin = request.args.get("lastlogin")
     expiration = request.args.get("expiration")
-    cursor.execute("SELECT googleid FROM UserTable WHERE googleid = (%s)", str(googleid))
+    cursor.execute("SELECT googleid FROM UserTable WHERE googleid='{}'".format(googleid))
     user_exists = cursor.fetchone()
     if(user_exists is None):
+        cursor.execute("SELECT NOW()")
+        accountcreated = cursor.fetchone()[0]
         cursor.execute("INSERT INTO UserTable (id, googleid, firstname, lastname, isadmin, accountcreated, lastlogin) VALUES(%s, %s, %s, %s, %s, %s, %s)", (int(max_int), str(googleid), str(firstname), str(lastname), str(isadmin), str(accountcreated), str(lastlogin),))
         conn.commit()
         backend.tokens.Generate_Token(googleid, cursor, expiration)
@@ -77,9 +79,9 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
         cursor.execute("UPDATE UserTable SET isadmin = (%s), lastlogin = (%s) WHERE id = (%s)", (str(isadmin), str(lastlogin), str(googleid)))
         backend.tokens.Generate_Token(googleid, cursor, expiration)
         conn.commit()
-    cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = (%s)", str(googleid))
+    cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = '{}'".format(googleid))
     admin = cursor.fetchone()[0]
-    cursor.execute("SELECT token FROM Token WHERE id = (%s)", str(googleid))
+    cursor.execute("SELECT token FROM Token WHERE id = '{}'".format(googleid))
     token = cursor.fetchone()[0]
     return {"loggedin":True, "isadmin":admin, "token":token}
 
@@ -165,7 +167,7 @@ def Put_Statuses():
 def Get_Token():
     googleid = request.args.get("googleid")
     users_token = request.args.get("token")
-    admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
+    admin = backend.tokens.Check_Token(googleid, users_token, cursor, conn)
     return admin
 
 @flask_app.route('/users')
