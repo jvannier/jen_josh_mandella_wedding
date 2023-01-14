@@ -21,10 +21,10 @@ def Check_Token(googleid:str, token:int, cursor, conn):
         cursor.execute("DELETE FROM Token WHERE googleid = '{}'" .format(googleid))
         conn.commit()
     cursor.execute("SELECT Token FROM Token WHERE googleid = '{}'" .format(googleid))
-    users_token = cursor.fetchone()[0]
+    users_token = cursor.fetchone()
     if(users_token is None):
         return {"loggedin":False, "admin":False}
-    elif(token == users_token):
+    elif(token == users_token[0]):
         cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = '{}'" .format(googleid))
         admin = cursor.fetchone()[0]
         return {"loggedin":True, "admin":admin}
