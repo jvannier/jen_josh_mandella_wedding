@@ -6,13 +6,13 @@ def Generate_Token(googleid:str, cursor, expiration:int):
     cursor.execute("SELECT Token FROM Token WHERE googleid='{}'" .format(googleid))
     token_exist = cursor.fetchone()
     if(token_exist is None):
-        cursor.execute("INSERT INTO Token(googleid, Token, Expiration) VALUES(%s, %s, %s)", (str(googleid), str(token), int(expiration),))
+        cursor.execute("INSERT INTO Token(googleid, Token, Expiration) VALUES ('{}', '{}', '{}')" .format(googleid,token,expiration))
     else:
-        cursor.execute("UPDATE Token SET Token = (%s) WHERE googleid = (%s)", (int(token),str(googleid)))
+        cursor.execute("UPDATE Token SET Token = '{}' WHERE googleid = '{}'" .format(token, googleid))
     return {"token":token}
 
 def Check_Token(googleid:str, token:int, cursor, conn):
-    cursor.execute("SELECT Expiration FROM Token WHERE ID = '{}'" .format(googleid))
+    cursor.execute("SELECT Expiration FROM Token WHERE googleid = '{}'" .format(googleid))
     expire = cursor.fetchone()
     if (expire is None):
         return {"loggedin":False, "admin":False}
