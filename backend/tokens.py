@@ -2,8 +2,13 @@ import random
 
 def Generate_Token(googleid:str, cursor, expiration:int):
     token = random.randint(0,99999999)
-    cursor.execute("INSERT INTO Token(ID, Token, Expiration, UserID) VALUES(%s, %s, %s, %s)", (str(googleid), int(token), int(expiration), int(100),))
-    return cursor
+    cursor.execute("SELECT Token FROM Token WHERE ID = (%s)", str(googleid))
+    token_exist = cursor.fetchone()
+    if(token_exist == None):
+        cursor.execute("INSERT INTO Token(ID, Token, Expiration, UserID) VALUES(%s, %s, %s, %s)", (str(googleid), int(token), int(expiration), int(100),))
+    else:
+        cursor.execute("UPDATE Token SET Token = (%s) WHERE ID = (%s)", int(token),str(googleid))
+    return {"token":token}
 
 def Check_Token(googleid:str, token:int, cursor, conn):
     cursor.execute("SELECT Expiration FROM Token WHERE ID = (%s)", str(googleid))
