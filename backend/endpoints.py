@@ -66,7 +66,7 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
     expiration = request.args.get("expiration")
     cursor.execute("SELECT googleid FROM UserTable WHERE googleid = (%s)", str(googleid))
     user_exists = cursor.fetchone()
-    if(user_exists == None):
+    if(user_exists is None):
         cursor.execute("INSERT INTO UserTable (id, googleid, firstname, lastname, isadmin, accountcreated, lastlogin) VALUES(%s, %s, %s, %s, %s, %s, %s)", (int(max_int), str(googleid), str(firstname), str(lastname), str(isadmin), str(accountcreated), str(lastlogin),))
         conn.commit()
         backend.tokens.Generate_Token(googleid, cursor, expiration)
@@ -78,8 +78,10 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
         backend.tokens.Generate_Token(googleid, cursor, expiration)
         conn.commit()
     cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = (%s)", str(googleid))
-    admin = cursor.fetchone()
-    return {"loggedin":True, "isadmin":admin}
+    admin = cursor.fetchone()[0]
+    cursor.execute("SELECT token FROM Token WHERE id = (%s)", str(googleid))
+    token = cursor.fetchone()[0]
+    return {"loggedin":True, "isadmin":admin, "token":token}
 
 @flask_app.route('/rsvp/<int:googleid>', methods = ['GET'])
 @cross_origin()
@@ -115,7 +117,7 @@ def Put_RSVP():
         return admin
     cursor.execute("SELECT id FROM UserTable WHERE userid = (%s)", str(googleid))
     exist = cursor.fetchone()
-    if(exist == None):
+    if(exist is None):
         cursor.execute("INSERT INTO UserTable (id, rsvp, mealselect, weddingsong, userid) VALUES(%s, %s, %s, %s, %s)", (int(max_int), str(RSVP), str(MealSelect), str(WeddingSong), str(googleid),))
     else:
         cursor.execute("UPDATE UserTable SET (rsvp, mealselect, weddingsong) VALUES(%s, %s, %s) WHERE userid = (%s)", (str(RSVP), str(MealSelect), str(WeddingSong), str(googleid)))
@@ -151,7 +153,7 @@ def Put_Statuses():
     max_int += 1
     cursor.execute("SELECT todo FROM Checklist WHERE todo = (%s)", str(todo))
     todo_exist = cursor.fetchone()
-    if(todo_exist == None):
+    if(todo_exist is None):
         cursor.execute("INSERT INTO Checklist (id, todo, isdone) VALUES(%s, %s, %s)", (int(max_int), str(todo), str(isdone)))
     else:
         cursor.execute("UPDATE Checklist SET isdone = (%s) WHERE todo = (%s)", (str(isdone), str(todo)))
@@ -165,15 +167,6 @@ def Get_Token():
     users_token = request.args.get("token")
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
     return admin
-
-@flask_app.route('/token', methods = ['PUT'])
-@cross_origin()
-def Put_Token():
-    googleid = request.args.get("googleid")
-    expiration = request.args.get("expiration")
-    token = backend.tokens.Generate_Token(googleid, cursor, expriation)
-    conn.commit()
-    return token
 
 @flask_app.route('/users')
 @cross_origin()
