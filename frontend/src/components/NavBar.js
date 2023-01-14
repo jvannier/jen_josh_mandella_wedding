@@ -38,10 +38,11 @@ function NavBar(props) {
       {rsvpPageLink}
       <NavDropdown className="link" id="infoLink" title="More Info">
         <NavDropdown.Item href="/info#Location">Location</NavDropdown.Item>
-        <NavDropdown.Item href="/info#Hotels">Hotels</NavDropdown.Item>
+        <NavDropdown.Item href="/info#Hotel">Hotel</NavDropdown.Item>
         <NavDropdown.Item href="/info#Colors">Colors</NavDropdown.Item>
         <NavDropdown.Item href="/info#Wedding%20Registry">Wedding Registry</NavDropdown.Item>
         <NavDropdown.Item href="/info#Wedding%20Party">Wedding Party</NavDropdown.Item>
+        <NavDropdown.Item href="/info#Q%20&%20A">Q & A</NavDropdown.Item>
       </NavDropdown>
       {adminPageLink}
       <div id="userName">

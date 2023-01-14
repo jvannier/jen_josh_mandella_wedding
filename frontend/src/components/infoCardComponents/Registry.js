@@ -1,20 +1,18 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import "./Registry.css";
 
 
 function Registry() {
     return (
-        <Fragment>
+        <div id="weddingIframeWrapper">
             <Card.Title>Wedding Registry</Card.Title>
-            <Button
-                id="registryButton"
-                href="todo?"
-            >
-                TODO: Go to wedding registry website
-            </Button>
-        </Fragment>
+            <iframe
+                id="weddingIframe"
+                title="Wedding Registry"
+                src="https://registry.theknot.com/jen-vannier-josh-mandella-july-2023-mi/57972317"
+            />
+        </div>
     );
 }
 

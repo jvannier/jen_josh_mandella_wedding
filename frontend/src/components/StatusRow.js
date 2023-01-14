@@ -30,7 +30,8 @@ function StatusRow(props) {
                         }}
                     />
                     <Button variant="light" className="statusButton"
-                        onClick={event => {console.log("TODO: update status in DB (and checked status?")}}
+                        onClick={event => {console.log(props.status)
+                            props.status.submit(props.user, checked, text)}}
                     >
                         Update
                     </Button>
@@ -61,9 +62,7 @@ function StatusRow(props) {
                 </div>
             </Td>
             <Td className="statusTd">
-                {/* <div className="status"> */}
-                    {statusTextContainer}
-                {/* </div> */}
+                {statusTextContainer}
             </Td>
         </Tr>
     );

@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import { getAllRSVPs } from "./rsvp";
-import { API_URL } from "./consts";
+import { get, put } from "../apiUtil";
 
 
 class User {
@@ -69,7 +69,7 @@ class User {
         const responsePayload = jwt_decode(credentialResponse.credential);
 
         // PUT user to DB - if user exists just updates login_expiration_time
-        let query_params = [
+        let queryParams = [
             ["googleid", responsePayload.sub],  // The unique ID of the user's Google Account
             ["firstname", responsePayload.given_name],
             ["lastname", responsePayload.family_name],
@@ -78,13 +78,7 @@ class User {
             ["lastlogin", "1770-01-01"],  // TODO: SHOULDN'T BE A QUERY PARAM
             // ["expiration_date", responsePayload.exp],  // TODO. Note: is an integer
         ];
-        query_params = query_params.map(
-            param => `${param[0]}=${param[1]}`
-        ).join("&");
-        // await fetch(
-        //     API_URL + `/users/PUT?${query_params}`,
-        //     {method: 'PUT'},
-        // );
+        // await put(-1, "/users", queryParams);  // TODO: when endpoint works
 
         this.setUserID(responsePayload.sub);
         this.setUserName(responsePayload.name);
@@ -96,8 +90,8 @@ class User {
 
     async isLoggedIn() {
         // TODO: Call API for if logged in (check if token expired)
-        // return new Promise((resolve, reject) => resolve(true));
-        return new Promise((resolve, reject) => resolve(false));
+        return new Promise((resolve, reject) => resolve(true));
+        // return new Promise((resolve, reject) => resolve(false));
     }
 
     async isLoggedInAdmin() {
@@ -107,8 +101,8 @@ class User {
         return new Promise((resolve, reject) => resolve({
             "admin": false,
             // "admin": true,
-            "loggedIn": false,
-            // "loggedIn": true,
+            // "loggedIn": false,
+            "loggedIn": true,
         }));
     }
 }
@@ -117,7 +111,7 @@ export default User;
 
 
 export let getAllUsers = async (user) => {
-    let users = await fetch(API_URL + "/users");
+    let users = await get(user, "/users");
     users = await users.json();
     let rsvps = await getAllRSVPs(user);
 

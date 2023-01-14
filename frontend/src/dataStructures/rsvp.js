@@ -1,12 +1,10 @@
-import { API_URL } from "./consts";
+import { get, put } from "../apiUtil";
 
 
 class RSVP {
     static async getCurrentRSVP(user) {
         // Get current RSVP from API
-        // let rsvp = await fetch(
-        //     API_URL + "/rsvp/" + user.userID + "/GET",
-        // );
+        // let rsvp = await get(user, "/rsvp/" + user.userID);
         // rsvp = await rsvp.json();
         let rsvp = [1, false, "Food", "lalala"]; // TODO: delete this and uncomment above lines when there's stuff in the DB
 
@@ -27,12 +25,20 @@ class RSVP {
         return [response, food, songSuggestion];
     }
 
-    static submit(user, response, food, songSuggestion) {
+    static async submit(user, response, food, songSuggestion) {
         // TODO: Send update to db
         console.log("user:", user);
         console.log("rsvp:", response);
         console.log("food:", food);
         console.log("songSuggestion:", songSuggestion);
+
+        // TODO: get right query params
+        let queryParams = [
+            ["rsvp", response ? "t" : "f"],
+            ["food", food],
+            ["songSuggestion", songSuggestion],
+        ];
+        // await put(user, "/rsvp", queryParams)
     }
 }
 
@@ -41,7 +47,7 @@ export default RSVP;
 
 
 export let getAllRSVPs = async (user) => {
-    let rsvps = await fetch(API_URL + "/rsvp");
+    let rsvps = await get(user, "/rsvp");
     rsvps = await rsvps.json();
 
     let result = [];
