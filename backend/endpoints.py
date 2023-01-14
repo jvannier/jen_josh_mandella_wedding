@@ -33,29 +33,9 @@ cursor = conn.cursor()
 def Welcome():
     return "Welcome to the API!!!"
 
-
-@flask_app.route('/users')
+@flask_app.route('/users/<int:googleid>', methods = ['GET'])
 @cross_origin()
-def Get_Users():
-    cursor.execute("SELECT * FROM UserTable")
-    UserRowTuple = cursor.fetchall()
-    UserRowJson = json.dumps(UserRowTuple)
-    return UserRowJson
-
-
-@flask_app.route('/rsvp')
-@cross_origin()
-def Get_RSVPs():
-    cursor.execute("SELECT * FROM PersonalSelections")
-    UserRowTuple = cursor.fetchall()
-    UserRowJson = json.dumps(UserRowTuple)
-    return UserRowJson
-
-
-@flask_app.route('/users/<int:googleid>/GET')
-@cross_origin()
-def Get_User():
-    googleid = request.args.get("googleid")
+def Get_User(googleid:int):
     token = request.args.get("token")
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
     if(admin["loggedin"] == False):#Check if user is logged in
@@ -103,8 +83,7 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
 
 @flask_app.route('/rsvp/<int:googleid>', methods = ['GET'])
 @cross_origin()
-def Get_RSVP():
-    googleid = request.args.get("googleid")
+def Get_RSVP(googleid:int):
     token = request.args.get("token")
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
     if(admin["loggedin"] == False):
