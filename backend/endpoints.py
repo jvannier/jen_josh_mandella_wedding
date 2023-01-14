@@ -10,7 +10,6 @@ from flask import (
 from flask_cors import cross_origin
 from flask import Response
 from . import flask_app
-from time import time
 import os
 import psycopg2
 import backend.tokens
@@ -40,7 +39,7 @@ def Get_User(googleid:int):
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
     if(admin["loggedin"] == False):#Check if user is logged in
         return admin
-    cursor.execute("SELECT * FROM UserTable WHERE googleid= (%s)", ( str(googleid),))
+    cursor.execute("SELECT * FROM UserTable WHERE googleid= '{}'" .format(googleid),)
     UserRowTuple = cursor.fetchone()
     UserRowJson = json.dumps(UserRowTuple)
     return UserRowJson
@@ -61,14 +60,14 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
     firstname = request.args.get("firstname")
     lastname = request.args.get("lastname")
     isadmin = False
-#    accountcreated = request.args.get("accountcreated")
-    lastlogin = request.args.get("lastlogin")
     expiration = request.args.get("expiration")
     cursor.execute("SELECT googleid FROM UserTable WHERE googleid='{}'".format(googleid))
     user_exists = cursor.fetchone()
     if(user_exists is None):
         cursor.execute("SELECT NOW()")
         accountcreated = cursor.fetchone()[0]
+        cursor.execute("SELECT NOW()")# There is definitely a better way to do this
+        lastlogin = cursor.fetchone()[0]
         cursor.execute("INSERT INTO UserTable (id, googleid, firstname, lastname, isadmin, accountcreated, lastlogin) VALUES(%s, %s, %s, %s, %s, %s, %s)", (int(max_int), str(googleid), str(firstname), str(lastname), str(isadmin), str(accountcreated), str(lastlogin),))
         conn.commit()
         backend.tokens.Generate_Token(googleid, cursor, expiration)
@@ -76,12 +75,14 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
 #    cursor.close() currently closing here causes issues with continuous website use; need to impliment clean up seperately
 #    conn.close()
     else:
-        cursor.execute("UPDATE UserTable SET isadmin = (%s), lastlogin = (%s) WHERE id = (%s)", (str(isadmin), str(lastlogin), str(googleid)))
+        cursor.execute("SELECT NOW()")
+        lastlogin = cursor.fetchone()[0]
+        cursor.execute("UPDATE UserTable SET isadmin = (%s), lastlogin = (%s) WHERE googleid = (%s)", (str(isadmin), str(lastlogin), str(googleid)))
         backend.tokens.Generate_Token(googleid, cursor, expiration)
         conn.commit()
     cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = '{}'".format(googleid))
     admin = cursor.fetchone()[0]
-    cursor.execute("SELECT token FROM Token WHERE id = '{}'".format(googleid))
+    cursor.execute("SELECT token FROM Token WHERE googleid = '{}'".format(googleid))
     token = cursor.fetchone()[0]
     return {"loggedin":True, "isadmin":admin, "token":token}
 
@@ -92,7 +93,7 @@ def Get_RSVP(googleid:int):
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
     if(admin["loggedin"] == False):
         return admin
-    cursor.execute("SELECT * FROM PersonalSelections WHERE UserID= (%s)", (str(googleid),))
+    cursor.execute("SELECT * FROM PersonalSelections WHERE UserID= '{}'" .format(googleid),)
     UserRowTuple = cursor.fetchone()
     UserRowJson = json.dumps(UserRowTuple)
     return UserRowJson
@@ -117,7 +118,7 @@ def Put_RSVP():
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
     if(admin["loggedin"] == False):
         return admin
-    cursor.execute("SELECT id FROM UserTable WHERE userid = (%s)", str(googleid))
+    cursor.execute("SELECT id FROM UserTable WHERE userid = '{}'" .format(googleid))
     exist = cursor.fetchone()
     if(exist is None):
         cursor.execute("INSERT INTO UserTable (id, rsvp, mealselect, weddingsong, userid) VALUES(%s, %s, %s, %s, %s)", (int(max_int), str(RSVP), str(MealSelect), str(WeddingSong), str(googleid),))
@@ -153,7 +154,7 @@ def Put_Statuses():
     else:
         max_int = max_int[0]
     max_int += 1
-    cursor.execute("SELECT todo FROM Checklist WHERE todo = (%s)", str(todo))
+    cursor.execute("SELECT todo FROM Checklist WHERE todo = '{}'" .format(todo))
     todo_exist = cursor.fetchone()
     if(todo_exist is None):
         cursor.execute("INSERT INTO Checklist (id, todo, isdone) VALUES(%s, %s, %s)", (int(max_int), str(todo), str(isdone)))

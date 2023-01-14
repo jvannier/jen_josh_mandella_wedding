@@ -1,28 +1,31 @@
 import random
+from time import time
 
 def Generate_Token(googleid:str, cursor, expiration:int):
     token = random.randint(0,99999999)
-    cursor.execute("SELECT Token FROM Token WHERE ID='{}'" .format(googleid))
+    cursor.execute("SELECT Token FROM Token WHERE googleid='{}'" .format(googleid))
     token_exist = cursor.fetchone()
     if(token_exist is None):
-        cursor.execute("INSERT INTO Token(ID, Token, Expiration, UserID) VALUES(%s, %s, %s, %s)", (str(googleid), int(token), int(expiration), int(100),))
+        cursor.execute("INSERT INTO Token(googleid, Token, Expiration) VALUES(%s, %s, %s)", (str(googleid), str(token), int(expiration),))
     else:
-        cursor.execute("UPDATE Token SET Token = (%s) WHERE ID = (%s)", (int(token),str(googleid)))
+        cursor.execute("UPDATE Token SET Token = (%s) WHERE googleid = (%s)", (int(token),str(googleid)))
     return {"token":token}
 
 def Check_Token(googleid:str, token:int, cursor, conn):
-    cursor.execute("SELECT Expiration FROM Token WHERE ID = (%s)", str(googleid))
-    expire = cursor.fetchone()[0]
+    cursor.execute("SELECT Expiration FROM Token WHERE ID = '{}'" .format(googleid))
+    expire = cursor.fetchone()
+    if (expire is None):
+        return {"loggedin":False, "admin":False}
     epoch_time = int(time())
-    if(epoch_time >= expire):
-        cursor.execute("DELETE FROM Token WHERE ID = (%s)", str(googleid))
+    if(epoch_time >= expire[0]):
+        cursor.execute("DELETE FROM Token WHERE googleid = '{}'" .format(googleid))
         conn.commit()
-    cursor.execute("SELECT Token FROM Token WHERE ID = (%s)", str(googleid))
-    token = cursor.fetchone()[0]
-    if(token is None):
+    cursor.execute("SELECT Token FROM Token WHERE googleid = '{}'" .format(googleid))
+    users_token = cursor.fetchone()[0]
+    if(users_token is None):
         return {"loggedin":False, "admin":False}
     elif(token == users_token):
-        cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = (%s)", str(googleid))
+        cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = '{}'" .format(googleid))
         admin = cursor.fetchone()[0]
         return {"loggedin":True, "admin":admin}
     else:
