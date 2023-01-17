@@ -17,15 +17,19 @@ from psycopg2.extensions import parse_dsn
 
 temp = os.environ['DATABASE_URL']
 db_environ = parse_dsn(temp)
-conn = psycopg2.connect(
-                        database = db_environ["dbname"],
-                        host = db_environ["host"],
-                        user = db_environ["user"],
-                        password = db_environ["password"],
-                        port = db_environ["port"]
-)
-cursor = conn.cursor()
 
+def create_conn():
+    conn = psycopg2.connect(
+        database = db_environ["dbname"],
+        host = db_environ["host"],
+        user = db_environ["user"],
+        password = db_environ["password"],
+        port = db_environ["port"]
+    )
+    cursor = conn.cursor()
+    return conn, cursor
+
+conn, cursor = create_conn()
 
 @flask_app.route('/api')
 @cross_origin()
@@ -50,7 +54,7 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
     cursor.execute("SELECT MAX(id) FROM UserTable") #learned about serial after this implimentation
     max_id = cursor.fetchone()
     max_int = list(max_id)
-    if len(max_int) == 0:
+    if len(max_int) == 0 or (len(max_int) == 1 and max_int[0] == None):
         max_int[0] = 0
         max_int = max_int[0]
     else:
@@ -77,7 +81,7 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
     else:
         cursor.execute("SELECT NOW()")
         lastlogin = cursor.fetchone()[0]
-        cursor.execute("UPDATE UserTable SET isadmin = (%s), lastlogin = (%s) WHERE googleid = (%s)", (str(isadmin), str(lastlogin), str(googleid)))
+        cursor.execute("UPDATE UserTable SET lastlogin = (%s) WHERE googleid = (%s)", (str(lastlogin), str(googleid)))
         backend.tokens.Generate_Token(googleid, cursor, expiration)
         conn.commit()
     cursor.execute("SELECT isadmin FROM UserTable WHERE googleid = '{}'".format(googleid))
@@ -104,13 +108,13 @@ def Put_RSVP():
     cursor.execute("SELECT MAX(id) FROM PersonalSelections") #learned about serial after this implimentation
     max_id = cursor.fetchone()
     max_int = list(max_id)
-    if len(max_int) == 0:
+    if len(max_int) == 0 or (len(max_int)==1 and max_int[0] == None):
         max_int[0] = 0
         max_int = max_int[0]
     else:
         max_int = max_int[0]
     max_int += 1
-    RSVP = request.args.get("rsvp")
+    rsvp = request.args.get("rsvp")
     MealSelect = request.args.get("mealselect")
     WeddingSong = request.args.get("weddingsong")
     googleid = request.args.get("googleid")
@@ -118,21 +122,23 @@ def Put_RSVP():
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
     if(admin["loggedin"] == False):
         return admin
-    cursor.execute("SELECT id FROM UserTable WHERE userid = '{}'" .format(googleid))
+    cursor.execute("SELECT id FROM PersonalSelections WHERE userid = '{}'" .format(googleid))
     exist = cursor.fetchone()
     if(exist is None):
-        cursor.execute("INSERT INTO UserTable (id, rsvp, mealselect, weddingsong, userid) VALUES(%s, %s, %s, %s, %s)", (int(max_int), str(RSVP), str(MealSelect), str(WeddingSong), str(googleid),))
+        cursor.execute("INSERT INTO PersonalSelections (id, rsvp, mealselect, weddingsong, userid) VALUES(%s, %s, %s, %s, %s)", (int(max_int), str(RSVP), str(MealSelect), str(WeddingSong), str(googleid),))
     else:
-        cursor.execute("UPDATE UserTable SET (rsvp, mealselect, weddingsong) VALUES(%s, %s, %s) WHERE userid = (%s)", (str(RSVP), str(MealSelect), str(WeddingSong), str(googleid)))
+        cursor.execute("UPDATE PersonalSelections SET (rsvp, mealselect, weddingsong) VALUES(%s, %s, %s) WHERE userid = (%s)", (str(RSVP), str(MealSelect), str(WeddingSong), str(googleid)))
     conn.commit()
     return {}
 
 @flask_app.route('/statuses', methods = ['GET'])
 @cross_origin()
 def Get_Statuses():
+    conn, cursor = create_conn()
     cursor.execute("SELECT * FROM Checklist")
     UserRowTuple = cursor.fetchall()
     UserRowJson = json.dumps(UserRowTuple)
+    conn.close()
     return UserRowJson
 
 @flask_app.route('/statuses', methods = ['PUT'])
@@ -174,6 +180,7 @@ def Get_Token():
 @flask_app.route('/users')
 @cross_origin()
 def Get_Users():
+    conn, cursor = create_conn()
     googleid = request.args.get("googleid")
     token = request.args.get("token")
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
@@ -182,6 +189,7 @@ def Get_Users():
     cursor.execute("SELECT * FROM UserTable")
     UserRowTuple = cursor.fetchall()
     UserRowJson = json.dumps(UserRowTuple)
+    conn.close()
     return UserRowJson
 
 @flask_app.route('/rsvp')
