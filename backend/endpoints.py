@@ -125,9 +125,9 @@ def Put_RSVP():
     cursor.execute("SELECT id FROM PersonalSelections WHERE userid = '{}'" .format(googleid))
     exist = cursor.fetchone()
     if(exist is None):
-        cursor.execute("INSERT INTO PersonalSelections (id, rsvp, mealselect, weddingsong, userid) VALUES(%s, %s, %s, %s, %s)", (int(max_int), str(RSVP), str(MealSelect), str(WeddingSong), str(googleid),))
+        cursor.execute("INSERT INTO PersonalSelections (id, rsvp, mealselect, weddingsong, userid) VALUES(%s, %s, %s, %s, %s)", (int(max_int), str(rsvp), str(MealSelect), str(WeddingSong), str(googleid),))
     else:
-        cursor.execute("UPDATE PersonalSelections SET (rsvp, mealselect, weddingsong) VALUES(%s, %s, %s) WHERE userid = (%s)", (str(RSVP), str(MealSelect), str(WeddingSong), str(googleid)))
+        cursor.execute("UPDATE PersonalSelections SET (rsvp, mealselect, weddingsong) VALUES(%s, %s, %s) WHERE userid = (%s)", (str(rsvp), str(MealSelect), str(WeddingSong), str(googleid)))
     conn.commit()
     return {}
 
