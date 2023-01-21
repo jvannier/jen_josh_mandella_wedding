@@ -17,6 +17,8 @@ function Hotel() {
                 <br/>
                 <br/>
                 We will be (it is not done yet - TODO) booking two blocks of rooms in this hotel - one for people who want to sleep / have quiet and one for those of us that plan to party all night.
+
+or motel6
             </Card.Text>
             <Button
                 className="cardButton"

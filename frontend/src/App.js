@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     user.isLoggedInAdmin().then(result => {
-      if (result["loggedIn"] === true) {
+      if (result["loggedin"] === true) {
         setRsvpPageLink(
           <Route exact path="/rsvp" element={
             <RSVP user={user}/>

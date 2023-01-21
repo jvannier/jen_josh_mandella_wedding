@@ -2,9 +2,9 @@ import { API_URL } from "./dataStructures/consts";
 
 
 function assembleQueryParams(user, queryParams) {
-    if (user !== -1) {  // Happens when logging in originally
+    if (user !== -1) {  // Happens when logging in
         queryParams.push(
-            ["userID", user.userID],
+            ["googleid", user.userID],
             ["token", user.token],
         );
     }

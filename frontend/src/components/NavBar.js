@@ -11,7 +11,7 @@ function NavBar(props) {
 
   useEffect(() => {
     props.user.isLoggedInAdmin().then(result => {
-      if (result["loggedIn"] === true) {
+      if (result["loggedin"] === true) {
         setRsvpPageLink(
           <Link className="link" id="rsvpLink" to="/rsvp">RSVP</Link>
         );

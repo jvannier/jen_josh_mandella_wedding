@@ -1,7 +1,7 @@
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import React, { useEffect } from "react";
 import "./Login.css";
-import Button from "react-bootstrap/Button"
+import Button from "react-bootstrap/Button" 
 // TODO: Custom login button
 
 

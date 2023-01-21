@@ -1,17 +1,17 @@
 import { get, put } from "../apiUtil";
 
 
+// TODO: Add some indication of success to rsvp, the knot filter thing breaks the website
 class RSVP {
     static async getCurrentRSVP(user) {
         // Get current RSVP from API
-        // let rsvp = await get(user, "/rsvp/" + user.userID);
-        // rsvp = await rsvp.json();
-        let rsvp = [1, false, "Food", "lalala"]; // TODO: delete this and uncomment above lines when there's stuff in the DB
+        let rsvp = await get(user, "/rsvp/" + user.userID);
+        rsvp = await rsvp.json();
 
         let response;
         let food;
         let songSuggestion;
-        if (rsvp.length < 1) {
+        if (rsvp === undefined) {
             // No RSVP found
             response = false;
             food = "";
@@ -26,24 +26,16 @@ class RSVP {
     }
 
     static async submit(user, response, food, songSuggestion) {
-        // TODO: Send update to db
-        console.log("user:", user);
-        console.log("rsvp:", response);
-        console.log("food:", food);
-        console.log("songSuggestion:", songSuggestion);
-
-        // TODO: get right query params
         let queryParams = [
             ["rsvp", response ? "t" : "f"],
-            ["food", food],
-            ["songSuggestion", songSuggestion],
+            ["mealselect", food],
+            ["weddingsong", songSuggestion],
         ];
-        // await put(user, "/rsvp", queryParams)
+        await put(user, "/rsvp", queryParams);
     }
 }
 
 export default RSVP;
-
 
 
 export let getAllRSVPs = async (user) => {

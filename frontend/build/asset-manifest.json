@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.7eef9a68.css",
-    "main.js": "/static/js/main.aea24120.js",
+    "main.js": "/static/js/main.43b26860.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/ArtemisBox.jpg": "/static/media/ArtemisBox.a937f29e5d0d485bec5d.jpg",
     "static/media/Artemis.jpg": "/static/media/Artemis.175236363d59e9f7cafc.jpg",
@@ -11,11 +11,11 @@
     "static/media/JJWeddingBanner (DARK).png": "/static/media/JJWeddingBanner (DARK).92abd9c3c86ca572a3c8.png",
     "index.html": "/index.html",
     "main.7eef9a68.css.map": "/static/css/main.7eef9a68.css.map",
-    "main.aea24120.js.map": "/static/js/main.aea24120.js.map",
+    "main.43b26860.js.map": "/static/js/main.43b26860.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7eef9a68.css",
-    "static/js/main.aea24120.js"
+    "static/js/main.43b26860.js"
   ]
 }
