@@ -17,7 +17,7 @@ function RSVP(props) {
     let popupHtml = (
         <Modal show={popup} onHide={() => setPopup(false)}>
             <Modal.Header closeButton>
-                <Modal.Title>Thank you!</Modal.Title>
+                <Modal.Title id="rsvpTitle">Thank you!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Table role="grid" className="rsvpTable">
