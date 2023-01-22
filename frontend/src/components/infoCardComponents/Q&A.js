@@ -16,14 +16,14 @@ function QA() {
             <span>
                 Please arrive between 5pm and 5:30pm if you plan to attend the ceremony. If you plan to attend just the reception please arrive any time between 6pm and 11pm.
                 <Button className="cardButton" href={`${API_URL}/info#Location`}>
-                    Click here for further information.
+                    Click here for more information.
                 </Button>
             </span>
         ],
         ["Where do I park?", "There is a good amount of onsite parking, but you may want to consider parking at the hotel you'll be staying at and sharing a ride to the venue, as you may want to utilize the shuttles going from the venue to the hotel after the reception. No driving and drinking, please. :)"],
         ["I'm from out of town. Where do I stay?",
             <Button className="cardButton" href={`${API_URL}/info#Hotel`}>
-                Click here for this information.
+                Click here for more information.
             </Button>
         ],
         ["What happens if I'm late?", "The ceremony is between 5:30pm and 6pm. Arriving anytime from 5pm to 5:30pm or after 6pm is fine."],

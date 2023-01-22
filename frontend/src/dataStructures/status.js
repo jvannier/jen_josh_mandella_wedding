@@ -1,4 +1,4 @@
-import { get } from "../apiUtil";
+import { get, put } from "../apiUtil";
 
 
 class Status {
@@ -32,16 +32,24 @@ class Status {
 
     setChecked(value, user) {
         this.checked = value;
-        this.submit(user);  // Update DB
+        this.addStatusInDB(user);  // Update DB
     }
 
-    addStatusInDB(user) {
-        // TODO: Store new row data in DB
+    setText(value) {  // More for internal consistency than anything else
+        this.text = value;
     }
 
-    async submit(user) {
-        // TODO: Update status in DB
-        console.log("TODO: submit", this.checked, this.text)
+    async addStatusInDB(user) {
+        let queryParams = [
+            ["isdone",  this.checked],
+            ["todo",  this.text],
+        ];
+        await put(user, "/statuses", queryParams);
+    }
+
+    async deleteStatus(user) {
+        // TODO: Delete status in DB
+        console.log("TODO: DELETE STATUS", this.checked, this.text);
     }
 }
 

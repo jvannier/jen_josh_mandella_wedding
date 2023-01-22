@@ -35,10 +35,7 @@ function Statuses(props) {
     useEffect(() => {
         if (props.user.isAdmin) {
             setAdminInput(
-                <AdminStatusRow
-                    setStatusRows={setStatusRows}
-                    user={props.user}
-                />
+                <AdminStatusRow user={props.user}/>
             );
         } else {
             setAdminInput();

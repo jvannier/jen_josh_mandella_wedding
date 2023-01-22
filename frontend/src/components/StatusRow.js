@@ -26,14 +26,14 @@ function StatusRow(props) {
                         value={text}
                         type="text" className="textInput"
                         onChange={event => {
+                            props.status.setText(event.target.value);
                             setText(event.target.value);
                         }}
                     />
-                    <Button variant="light" className="statusButton"
-                        onClick={event => {console.log(props.status)
-                            props.status.submit(props.user, checked, text)}}
+                    <Button className="statusButton" id="deleteStatus"
+                        onClick={event => props.status.deleteStatus(props.user)}
                     >
-                        Update
+                        Delete
                     </Button>
                 </div>
             );

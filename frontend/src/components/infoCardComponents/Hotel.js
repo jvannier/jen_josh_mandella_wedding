@@ -7,7 +7,7 @@ import "./Hotel.css";
 function Hotel() {
     return (
         <Fragment>
-            <Card.Title>Recommended Hotel: MGM Grand Detroit</Card.Title>
+            <Card.Title>Hotels</Card.Title>
             <Card.Text id="hotelText">
                 There will be shuttles going to two different hotels (see below) from the wedding venue from -TODO- to -TODO- pm.
                 <br/>

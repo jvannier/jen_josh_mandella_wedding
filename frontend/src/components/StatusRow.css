@@ -10,8 +10,26 @@
 
 .textInput {
     width: 100%;
+    background-color: slategray !important;
+    color: white !important;
+    min-width: 25vw;
+}
+
+.textInput:focus {
+    background-color: white !important;
+    color: black !important;
 }
 
 th {
     text-align: center !important;
+}
+
+.statusButton {
+    margin-left: 1%;
+}
+
+#deleteStatus {
+    background-image: linear-gradient(to bottom right, navy, purple);
+    color: white;
+    text-shadow: red 1px 0 10px;
 }
