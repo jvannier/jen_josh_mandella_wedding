@@ -46,3 +46,37 @@
     border-color: black;
     border-width: 5px;
 }
+
+/* Modal: */
+.modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rsvpTable {
+    border: none !important;
+    background: rgba(255, 255, 255, 0);
+}
+
+@media (prefers-color-scheme: light) {
+    .modal-content {
+        background-image: linear-gradient(to bottom right, #CC92F8, lavender) !important;
+        color: black !important;
+    }
+
+    .rsvpTable {
+        color: black;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .modal-content {
+        background-image: linear-gradient(to bottom right, navy, purple) !important;
+        color: lavender !important;
+    }
+
+    .rsvpTable {
+        color: lavender;
+    }
+}

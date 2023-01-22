@@ -1,31 +1,44 @@
 import React, { Fragment } from "react";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import "./Hotel.css";
 
 
 function Hotel() {
     return (
         <Fragment>
             <Card.Title>Recommended Hotel: MGM Grand Detroit</Card.Title>
-            <Card.Text>
-                1777 3rd Street
-                <br/>
-                Detroit, Michigan 48226
+            <Card.Text id="hotelText">
+                There will be shuttles going to two different hotels (see below) from the wedding venue from -TODO- to -TODO- pm.
                 <br/>
                 <br/>
-                There will be shuttles going to the hotel from the wedding venue from -TODO- to -TODO- pm.
+                For people who want to sleep / have quiet OR just don't want to pay the very large price tag attached to the MGM Grand Detroit Hotel, there is a Comfort Inn.
+                <Button
+                    className="cardButton"
+                    href="https://www.reservations.com/hotel/detroit-regency-hotel-detroit-mi"
+                >
+                    Comfort Inn
+                    <br/>
+                    1999 E Jefferson Ave
+                    <br/>
+                    Detroit, Michigan 48207
+                </Button>
                 <br/>
+                We will be staying at the MGM Grand Detroit to be loud and party all night.
                 <br/>
-                We will be (it is not done yet - TODO) booking two blocks of rooms in this hotel - one for people who want to sleep / have quiet and one for those of us that plan to party all night.
+                <Button
+                    className="cardButton"
+                    href="https://www.reservations.com/hotel/mgm-grand-detroit"
+                >
+                    MGM Grand Detroit
+                    <br />
+                    1777 3rd Street
+                    <br/>
+                    Detroit, Michigan 48226
+                    <br/>
+                </Button>
 
-or motel6
             </Card.Text>
-            <Button
-                className="cardButton"
-                href="https://www.reservations.com/hotel/mgm-grand-detroit"
-            >
-                Hotel Website
-            </Button>
         </Fragment>
     );
 }

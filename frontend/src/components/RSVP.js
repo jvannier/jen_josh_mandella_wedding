@@ -4,12 +4,41 @@ import RSVPDataStructure from "../dataStructures/rsvp";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import {Table, Thead, Tbody, Td, Th, Tr} from 'react-super-responsive-table';
 
 
 function RSVP(props) {
     let [response, setResponse] = useState(false);
     let [songSuggestion, setSongSuggestion] = useState("");
     let [food, setFood] = useState("");
+
+    let [popup, setPopup] = useState(false);
+    let popupHtml = (
+        <Modal show={popup} onHide={() => setPopup(false)}>
+            <Modal.Header closeButton>
+                <Modal.Title>Thank you!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Table role="grid" className="rsvpTable">
+                    <Thead className="rsvpTable">
+                        <Tr className="rsvpTable">
+                            <Th scope="col" className="rsvpTable">Response</Th>
+                            <Th scope="col" className="rsvpTable">Meal Selection</Th>
+                            <Th scope="col" className="rsvpTable">Song Suggestion</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody className="rsvpTable">
+                        <Tr className="rsvpTable">
+                            <Td key="response" className="rsvpTable">{response ? "Yes" : "No"}</Td>
+                            <Td key="food" className="rsvpTable">{food}</Td>
+                            <Td key="songSuggestion" className="rsvpTable">{songSuggestion}</Td>
+                        </Tr>
+                    </Tbody>
+                </Table>
+            </Modal.Body>
+        </Modal>
+    );
 
     useEffect(() => {
         async function fetchData() {
@@ -31,6 +60,7 @@ function RSVP(props) {
 
     return (
         <div id="rsv">
+            {popupHtml}
             <p id="currentRSVP">Current RSVP: {response ? "Yes" : "No"}</p>
             <div className="page" id="rsvpPage">
                 <span id="yes">
@@ -57,14 +87,20 @@ function RSVP(props) {
                                 onChange={event => setSongSuggestion(event.target.value)}
                             />
                             <br/>
-                            <Button variant="light" id="yesButton" onClick={event => submit(true, event)}>
+                            <Button variant="light" id="yesButton" onClick={event => {
+                                submit(true, event);
+                                setPopup(true);
+                            }}>
                                 Yes
                             </Button>
                         </div>
                     </Card>
                 </span>
                 <span id="no">
-                    <Button variant="light" id="noButton" onClick={event => submit(false, event)}>
+                    <Button variant="light" id="noButton" onClick={event => {
+                        submit(false, event);
+                        setPopup(true);
+                    }}>
                         No
                     </Button>
                 </span>

@@ -91,6 +91,13 @@ class User {
     }
 
     async isLoggedInAdmin() {
+        if (this.userID === undefined) {
+            // Don't need to check, we know they're not logged in
+            return {
+                "loggedin": false,
+                "admin": false,
+            };
+        }
         let result =  await get(this, "/token");
         result = await result.json();
         this.setIsAdmin(result["admin"]);

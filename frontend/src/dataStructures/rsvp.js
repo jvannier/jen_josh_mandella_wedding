@@ -1,7 +1,6 @@
 import { get, put } from "../apiUtil";
 
 
-// TODO: Add some indication of success to rsvp, the knot filter thing breaks the website
 class RSVP {
     static async getCurrentRSVP(user) {
         // Get current RSVP from API
@@ -11,7 +10,7 @@ class RSVP {
         let response;
         let food;
         let songSuggestion;
-        if (rsvp === undefined) {
+        if (Object.keys(rsvp).length <= 0) {
             // No RSVP found
             response = false;
             food = "";
