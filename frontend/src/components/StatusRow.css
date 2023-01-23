@@ -8,16 +8,8 @@
     margin-left: auto !important;
 }
 
-.textInput {
+.text {
     width: 100%;
-    background-color: slategray !important;
-    color: white !important;
-    min-width: 25vw;
-}
-
-.textInput:focus {
-    background-color: white !important;
-    color: black !important;
 }
 
 th {

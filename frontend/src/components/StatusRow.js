@@ -22,14 +22,7 @@ function StatusRow(props) {
         if (props.user.isAdmin) {
             setStatusTextContainer(
                 <div className="status">
-                    <Form.Control
-                        value={text}
-                        type="text" className="textInput"
-                        onChange={event => {
-                            props.status.setText(event.target.value);
-                            setText(event.target.value);
-                        }}
-                    />
+                    <div className="text">{text}</div>
                     <Button className="statusButton" id="deleteStatus"
                         onClick={event => props.status.deleteStatus(props.user)}
                     >

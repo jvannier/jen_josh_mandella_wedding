@@ -17,7 +17,10 @@ function NavBar(props) {
 
         if (props.user.isAdmin === true) {
           setAdminPageLink(
-            <Link className="link" id="adminLink" to="/admin#Users">Admin</Link>
+            <NavDropdown className="link" title="Admin">
+              <NavDropdown.Item href="/admin#Users">Users</NavDropdown.Item>
+              <NavDropdown.Item href="/admin#Invitees">Invitees</NavDropdown.Item>
+            </NavDropdown>
           );
         } else {
           setAdminPageLink("");
