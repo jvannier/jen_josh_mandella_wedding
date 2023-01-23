@@ -19,7 +19,7 @@ temp = os.environ['DATABASE_URL']
 db_environ = parse_dsn(temp)
 
 def create_conn():
-    conn = psycopg2.connect(
+        conn = psycopg2.connect(
         database = db_environ["dbname"],
         host = db_environ["host"],
         user = db_environ["user"],
@@ -39,6 +39,7 @@ def Welcome():
 @flask_app.route('/users/<int:googleid>', methods = ['GET'])
 @cross_origin()
 def Get_User(googleid:int):
+    conn, cursor = create_conn()
     token = request.args.get("token")
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
     if(admin["loggedin"] == False):#Check if user is logged in
@@ -46,11 +47,13 @@ def Get_User(googleid:int):
     cursor.execute("SELECT * FROM UserTable WHERE googleid= '{}'" .format(googleid),)
     UserRowTuple = cursor.fetchone()
     UserRowJson = json.dumps(UserRowTuple)
+    conn.close()
     return UserRowJson
 
 @flask_app.route('/users', methods = ['PUT'])
 @cross_origin()
 def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountcreated:str, lastlogin:str):
+    conn, cursor = create_conn()
     cursor.execute("SELECT MAX(id) FROM UserTable") #learned about serial after this implimentation
     max_id = cursor.fetchone()
     max_int = list(max_id)
@@ -88,23 +91,27 @@ def Put_User():#googleid:int, firstname:str, lastname:str, isadmin:str, accountc
     admin = cursor.fetchone()[0]
     cursor.execute("SELECT token FROM Token WHERE googleid = '{}'".format(googleid))
     token = cursor.fetchone()[0]
+    conn.close()
     return {"loggedin":True, "isadmin":admin, "token":token}
 
 @flask_app.route('/rsvp/<int:googleid>', methods = ['GET'])
 @cross_origin()
 def Get_RSVP(googleid:int):
+    conn, cursor = create_conn()
     token = request.args.get("token")
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
     if(admin["loggedin"] == False):
-        return admin
+        return {}
     cursor.execute("SELECT * FROM PersonalSelections WHERE UserID= '{}'" .format(googleid),)
     UserRowTuple = cursor.fetchone()
     UserRowJson = json.dumps(UserRowTuple)
+    conn.close()
     return UserRowJson
 
 @flask_app.route('/rsvp', methods = ['PUT'])
 @cross_origin()
 def Put_RSVP():
+    conn, cursor = create_conn()
     cursor.execute("SELECT MAX(id) FROM PersonalSelections") #learned about serial after this implimentation
     max_id = cursor.fetchone()
     max_int = list(max_id)
@@ -127,8 +134,9 @@ def Put_RSVP():
     if(exist is None):
         cursor.execute("INSERT INTO PersonalSelections (id, rsvp, mealselect, weddingsong, userid) VALUES(%s, %s, %s, %s, %s)", (int(max_int), str(rsvp), str(MealSelect), str(WeddingSong), str(googleid),))
     else:
-        cursor.execute("UPDATE PersonalSelections SET (rsvp, mealselect, weddingsong) VALUES(%s, %s, %s) WHERE userid = (%s)", (str(rsvp), str(MealSelect), str(WeddingSong), str(googleid)))
+        cursor.execute("UPDATE PersonalSelections SET rsvp = '{}', mealselect = '{}', weddingsong = '{}' WHERE userid = ('{}')".format(str(rsvp), str(MealSelect), str(WeddingSong), str(googleid)))
     conn.commit()
+    conn.close()
     return {}
 
 @flask_app.route('/statuses', methods = ['GET'])
@@ -144,6 +152,7 @@ def Get_Statuses():
 @flask_app.route('/statuses', methods = ['PUT'])
 @cross_origin()
 def Put_Statuses():
+    conn, cursor = create_conn()
     todo = request.args.get("todo")
     isdone = request.args.get("isdone")
     googleid = request.args.get("googleid")
@@ -167,14 +176,17 @@ def Put_Statuses():
     else:
         cursor.execute("UPDATE Checklist SET isdone = (%s) WHERE todo = (%s)", (str(isdone), str(todo)))
     conn.commit()
+    conn.close()
     return {"status":200}
 
 @flask_app.route('/token', methods = ['GET'])
 @cross_origin()
 def Get_Token():
+    conn, cursor = create_conn()
     googleid = request.args.get("googleid")
     users_token = request.args.get("token")
     admin = backend.tokens.Check_Token(googleid, users_token, cursor, conn)
+    conn.close()
     return admin
 
 @flask_app.route('/users')
@@ -195,6 +207,7 @@ def Get_Users():
 @flask_app.route('/rsvp')
 @cross_origin()
 def Get_RSVPs():
+    conn, cursor = create_conn()
     googleid = request.args.get("googleid")
     token = request.args.get("token")
     admin = backend.tokens.Check_Token(googleid, token, cursor, conn)
@@ -203,4 +216,5 @@ def Get_RSVPs():
     cursor.execute("SELECT * FROM PersonalSelections")
     UserRowTuple = cursor.fetchall()
     UserRowJson = json.dumps(UserRowTuple)
+    conn.close()
     return UserRowJson
