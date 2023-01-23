@@ -37,5 +37,5 @@ def Check_Token(googleid:str, token:int, cursor, conn):
             return {"loggedin":True, "admin":admin}
         else:
             return {"loggedin":False,"admin":False}
-    except psycopg2.ProgrammingError:
+    except psycopg2.ProgrammingError: #retry. Weird psycopg2.ProgrammingError: no results to fetch" bug in psycopg2
         return Check_Token(googleid, token, cursor, conn)
