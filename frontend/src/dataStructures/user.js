@@ -73,37 +73,35 @@ class User {
             ["googleid", responsePayload.sub],  // The unique ID of the user's Google Account
             ["firstname", responsePayload.given_name],
             ["lastname", responsePayload.family_name],
-            ["isadmin", "f"],
-            ["accountcreated", "1770-01-01"],  // TODO: SHOULDN'T BE A QUERY PARAM
-            ["lastlogin", "1770-01-01"],  // TODO: SHOULDN'T BE A QUERY PARAM
-            // ["expiration_date", responsePayload.exp],  // TODO. Note: is an integer
+            ["expiration", responsePayload.exp],
         ];
-        // await put(-1, "/users", queryParams);  // TODO: when endpoint works
+        let result = await put(-1, "/users", queryParams);
+        result = await result.json();
+        this.setToken(result["token"]);
 
         this.setUserID(responsePayload.sub);
         this.setUserName(responsePayload.name);
 
-        // TODO: Call API to get/create token and if is isAdmin
-        this.setIsAdmin(true);
-        this.setToken("tokentotally");
+        // Check if user is set to be an admin
+        await this.isLoggedIn();
     }
 
     async isLoggedIn() {
-        // TODO: Call API for if logged in (check if token expired)
-        return new Promise((resolve, reject) => resolve(true));
-        // return new Promise((resolve, reject) => resolve(false));
+        return await this.isLoggedInAdmin()["loggedin"];
     }
 
     async isLoggedInAdmin() {
-        // TODO: Call API
-        this.setIsAdmin(false);
-        // this.setIsAdmin(true);
-        return new Promise((resolve, reject) => resolve({
-            "admin": false,
-            // "admin": true,
-            // "loggedIn": false,
-            "loggedIn": true,
-        }));
+        if (this.userID === undefined) {
+            // Don't need to check, we know they're not logged in
+            return {
+                "loggedin": false,
+                "admin": false,
+            };
+        }
+        let result =  await get(this, "/token");
+        result = await result.json();
+        this.setIsAdmin(result["admin"]);
+        return result;
     }
 }
 

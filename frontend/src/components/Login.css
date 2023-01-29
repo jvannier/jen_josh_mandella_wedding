@@ -1,16 +1,16 @@
 @media (prefers-color-scheme: dark) {
     #logout {
         border-color: #5A5A5A !important;
-        background: #5A5A5A !important;
         color: lightgray !important;
+        background: rgb(255, 255, 255, 0);
     }
 }
 
 @media (prefers-color-scheme: light) {
     #logout {
         border-color: black !important;
-        background: purple !important;
-        color: lavender !important;
+        color: #301934 !important;
+        background: rgb(255, 255, 255, 0);
     }
 }
 

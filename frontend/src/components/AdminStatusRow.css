@@ -1,0 +1,5 @@
+#addStatus {
+    background-image: linear-gradient(to bottom right, purple, rgb(170, 170, 252), purple);
+    color: white;
+    text-shadow: black 1px 0 10px;
+}

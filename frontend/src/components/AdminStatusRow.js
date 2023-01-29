@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Status from "../dataStructures/status";
+import "./AdminStatusRow.css";
 import './StatusRow.css';
 import { Td, Tr } from 'react-super-responsive-table';
 import Button from 'react-bootstrap/Button';
@@ -11,10 +12,10 @@ function AdminStatusRow(props) {
     let [text, setText] = useState("");
     let newStatus;
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         newStatus = new Status(checked, text);
-        newStatus.addStatusInDB(props.user);
-        props.setStatusRows(statuses => statuses.concat(newStatus));
+        await newStatus.addStatusInDB(props.user);
+        window.location.reload(false);  // Hack: Force re-get and render rows
     }
 
     return (
@@ -27,7 +28,6 @@ function AdminStatusRow(props) {
                         onChange={() => {
                             setChecked(!checked);
                         }}
-                        // checked={checked}
                         disabled={!props.user.isAdmin}
                     />
                 </div>
@@ -41,8 +41,8 @@ function AdminStatusRow(props) {
                             setText(event.target.value)
                         }}
                     />
-                    <Button variant="light" className="statusButton" onClick={handleSubmit}>
-                        Add
+                    <Button className="statusButton" id="addStatus" onClick={handleSubmit}>
+                        Create
                     </Button>
                 </div>
             </Td>

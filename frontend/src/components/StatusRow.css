@@ -8,10 +8,20 @@
     margin-left: auto !important;
 }
 
-.textInput {
+.text {
     width: 100%;
 }
 
 th {
     text-align: center !important;
+}
+
+.statusButton {
+    margin-left: 1%;
+}
+
+#deleteStatus {
+    background-image: linear-gradient(to bottom right, navy, purple);
+    color: white;
+    text-shadow: red 1px 0 10px;
 }

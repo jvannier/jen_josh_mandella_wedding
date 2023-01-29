@@ -10,15 +10,17 @@ function NavBar(props) {
   let [adminPageLink, setAdminPageLink] = useState("");
 
   useEffect(() => {
-    props.user.isLoggedInAdmin().then(result => {
-      if (result["loggedIn"] === true) {
+    if (props.user.token) {  // Logged in
         setRsvpPageLink(
           <Link className="link" id="rsvpLink" to="/rsvp">RSVP</Link>
         );
 
-        if (result["admin"] === true) {
+        if (props.user.isAdmin === true) {
           setAdminPageLink(
-            <Link className="link" id="adminLink" to="/admin#Users">Admin</Link>
+            <NavDropdown className="link" title="Admin">
+              <NavDropdown.Item href="/admin#Users">Users</NavDropdown.Item>
+              <NavDropdown.Item href="/admin#Invitees">Invitees</NavDropdown.Item>
+            </NavDropdown>
           );
         } else {
           setAdminPageLink("");
@@ -27,7 +29,6 @@ function NavBar(props) {
         setAdminPageLink("");
         setRsvpPageLink("");
       }
-    });
     // eslint-disable-next-line
   }, [props.user.userID, props.user.token, props.user.isAdmin]);
 

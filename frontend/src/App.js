@@ -9,7 +9,6 @@ import User from "./dataStructures/user"
 import './App.css';
 
 
-// TODO: change tab icon
 function App() {
   let [userID, setUserID] = useState();
   let [userName, setUserName] = useState();
@@ -25,28 +24,26 @@ function App() {
   let [rsvpPageLink, setRsvpPageLink] = useState("");
 
   useEffect(() => {
-    user.isLoggedInAdmin().then(result => {
-      if (result["loggedIn"] === true) {
-        setRsvpPageLink(
-          <Route exact path="/rsvp" element={
-            <RSVP user={user}/>
+    if (user.token) {  // Logged in
+      setRsvpPageLink(
+        <Route exact path="/rsvp" element={
+          <RSVP user={user}/>
+        }/>
+      );
+
+      if (user.isAdmin) {
+        setAdminPageLink(
+          <Route exact path="/admin" element={
+            <Admin user={user}/>
           }/>
         );
-
-        if (result["admin"] === true) {
-          setAdminPageLink(
-            <Route exact path="/admin" element={
-              <Admin user={user}/>
-            }/>
-          );
-        } else {
-          setAdminPageLink("");
-        }
       } else {
         setAdminPageLink("");
-        setRsvpPageLink("");
       }
-    });
+    } else {
+      setAdminPageLink("");
+      setRsvpPageLink("");
+    }
     // eslint-disable-next-line
   }, [user.userID, user.token, user.isAdmin]);
 

@@ -47,8 +47,6 @@ td {
 
 #incompleteFilterButton {
     background-image: linear-gradient(to bottom right, rgb(170, 170, 252), rgb(195, 195, 255), purple);
-    /* background-color: lavender; */
-    /* color: navy; */
     color: black;
 }
 
