@@ -24,7 +24,7 @@ function RSVP(props) {
                     <Thead className="rsvpTable">
                         <Tr className="rsvpTable">
                             <Th scope="col" className="rsvpTable">Response</Th>
-                            <Th scope="col" className="rsvpTable">Meal Selection</Th>
+                            <Th scope="col" className="rsvpTable">Meal Restrictions</Th>
                             <Th scope="col" className="rsvpTable">Song Suggestion</Th>
                         </Tr>
                     </Thead>
@@ -66,17 +66,13 @@ function RSVP(props) {
                 <span id="yes">
                     <Card id="yesCard">
                         <div className="rsvpForm">
-                            <Form.Label className="rsvpText">Food Selection:</Form.Label><br/>
-                            <Form.Select
-                                aria-label="select dropdown"
+                            <Form.Label className="rsvpText">Food Restrictions:</Form.Label><br/>
+                            <Form.Control
                                 className="rsvpInput"
+                                type="text"
                                 value={food}
                                 onChange={event => setFood(event.target.value)}
-                            >
-                                <option>Open this select menu</option>
-                                <option value="Food">Food</option>
-                                <option value="OtherFood">OtherFood</option>
-                            </Form.Select>
+                            />
                             <br/>
 
                             <Form.Label className="rsvpText">Wedding Song Suggestion:</Form.Label><br/>
