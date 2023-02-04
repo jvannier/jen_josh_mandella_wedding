@@ -19,7 +19,7 @@ temp = os.environ['DATABASE_URL']
 db_environ = parse_dsn(temp)
 
 def create_conn():
-        conn = psycopg2.connect(
+    conn = psycopg2.connect(
         database = db_environ["dbname"],
         host = db_environ["host"],
         user = db_environ["user"],
@@ -28,8 +28,6 @@ def create_conn():
     )
     cursor = conn.cursor()
     return conn, cursor
-
-conn, cursor = create_conn()
 
 @flask_app.route('/api')
 @cross_origin()
