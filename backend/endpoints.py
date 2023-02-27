@@ -177,6 +177,16 @@ def Put_Statuses():
     conn.close()
     return {"status":200}
 
+@flask_app.route('/statuses', methods = ['DELETE'])
+@cross_origin()
+def Delete_Status():
+    todo = request.args.get("todo")
+    conn, cursor = create_conn()
+    cursor.execute("DELETE FROM Checklist WHERE todo = '{}'".format(todo))
+    conn.commit()
+    conn.close()
+    return {"status":200}
+
 @flask_app.route('/token', methods = ['GET'])
 @cross_origin()
 def Get_Token():

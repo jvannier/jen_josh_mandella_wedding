@@ -29,4 +29,12 @@ async function put(user, path, queryParams=[]) {
 }
 
 
-export { get, put };
+async function del(user, path, queryParams=[]) {
+    queryParams = assembleQueryParams(user, queryParams);
+    return await fetch(
+        `${API_URL}${path}?${queryParams}`,
+        {method: 'DELETE'}
+    );
+}
+
+export { del, get, put };

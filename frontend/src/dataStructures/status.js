@@ -1,4 +1,4 @@
-import { get, put } from "../apiUtil";
+import { del, get, put } from "../apiUtil";
 
 
 class Status {
@@ -48,8 +48,10 @@ class Status {
     }
 
     async deleteStatus(user) {
-        // TODO: Delete status in DB
-        console.log("TODO: DELETE STATUS", this.checked, this.text);
+        let queryParams = [
+            ["todo",  this.text],
+        ];
+        await del(user, "/statuses", queryParams);
     }
 }
 

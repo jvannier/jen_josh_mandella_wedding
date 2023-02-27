@@ -35,7 +35,7 @@ function BridalGuard() {
                     </Tr>
                     <Tr>
                         <Td>Bridal Guard</Td>
-                        <Td>That one cool guy we haven't asked</Td>
+                        <Td>Ben Bellis</Td>
                     </Tr>
                     <Tr>
                         <Td>Bridal Guard</Td>
